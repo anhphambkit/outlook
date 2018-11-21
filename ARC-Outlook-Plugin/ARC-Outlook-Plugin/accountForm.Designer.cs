@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(accountForm));
             this.formGeneralPanel = new System.Windows.Forms.Panel();
             this.leftLogoPanel = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.rightFormPanel = new System.Windows.Forms.Panel();
+            this.logoPlugin = new System.Windows.Forms.PictureBox();
             this.formGeneralPanel.SuspendLayout();
+            this.leftLogoPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPlugin)).BeginInit();
             this.SuspendLayout();
             // 
             // formGeneralPanel
@@ -39,7 +43,7 @@
             this.formGeneralPanel.AutoSize = true;
             this.formGeneralPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.formGeneralPanel.BackColor = System.Drawing.Color.Transparent;
-            this.formGeneralPanel.Controls.Add(this.panel1);
+            this.formGeneralPanel.Controls.Add(this.rightFormPanel);
             this.formGeneralPanel.Controls.Add(this.leftLogoPanel);
             this.formGeneralPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formGeneralPanel.Location = new System.Drawing.Point(4, 4);
@@ -51,6 +55,7 @@
             // 
             // leftLogoPanel
             // 
+            this.leftLogoPanel.Controls.Add(this.logoPlugin);
             this.leftLogoPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftLogoPanel.Location = new System.Drawing.Point(100, 86);
             this.leftLogoPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -58,12 +63,31 @@
             this.leftLogoPanel.Size = new System.Drawing.Size(492, 421);
             this.leftLogoPanel.TabIndex = 0;
             // 
-            // panel1
+            // rightFormPanel
             // 
-            this.panel1.Location = new System.Drawing.Point(845, 268);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
-            this.panel1.TabIndex = 1;
+            this.rightFormPanel.BackColor = System.Drawing.Color.White;
+            this.rightFormPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rightFormPanel.Location = new System.Drawing.Point(653, 86);
+            this.rightFormPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rightFormPanel.Name = "rightFormPanel";
+            this.rightFormPanel.Padding = new System.Windows.Forms.Padding(13, 0, 13, 12);
+            this.rightFormPanel.Size = new System.Drawing.Size(476, 421);
+            this.rightFormPanel.TabIndex = 1;
+            // 
+            // logoPlugin
+            // 
+            this.logoPlugin.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logoPlugin.BackgroundImage")));
+            this.logoPlugin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.logoPlugin.Cursor = System.Windows.Forms.Cursors.No;
+            this.logoPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.logoPlugin.Location = new System.Drawing.Point(0, 0);
+            this.logoPlugin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.logoPlugin.Name = "logoPlugin";
+            this.logoPlugin.Size = new System.Drawing.Size(492, 421);
+            this.logoPlugin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.logoPlugin.TabIndex = 0;
+            this.logoPlugin.TabStop = false;
+            this.logoPlugin.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // accountForm
             // 
@@ -83,6 +107,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARC Outlook Plugin";
             this.formGeneralPanel.ResumeLayout(false);
+            this.leftLogoPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPlugin)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,7 +117,8 @@
         #endregion
 
         private System.Windows.Forms.Panel formGeneralPanel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel rightFormPanel;
         private System.Windows.Forms.Panel leftLogoPanel;
+        private System.Windows.Forms.PictureBox logoPlugin;
     }
 }

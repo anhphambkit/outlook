@@ -1,0 +1,822 @@
+using ARC_Outlook_Plugin;
+using ARC_Outlook_Plugin.Properties;
+using Microsoft.Office.Interop.Outlook;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Json;
+using System.Resources;
+using System.Runtime.CompilerServices;
+using System.Windows.Forms;
+using Exception = System.Exception;
+
+namespace ARC_Outlook
+{
+    public class accountForm : Form
+    {
+        private IContainer components = null;
+
+        private Panel leftLogoPanel;
+
+        private PictureBox logoPlugin;
+
+        private Panel rightFormPanel;
+
+        private Panel logoutPanel;
+
+        private Panel actionsLogoutPanel;
+
+        private Panel rightActionLogoutPanel;
+
+        private Button logoutBtn;
+
+        private Panel leftActionLogoutPanel;
+
+        private Button cancelLogoutBtn;
+
+        private Label emailData;
+
+        private Label hostData;
+
+        private Label infoLogoutForm;
+
+        private Label titleFormLogout;
+
+        private Label emailLabelLogout;
+
+        private Label hostLabelLogout;
+
+        private Panel formLoginPanel;
+
+        private Panel actionLoginPanel;
+
+        private Panel btnAreaLogin;
+
+        private Panel leftActionLoginPanel;
+
+        private Button cancelLoginForm;
+
+        private Panel rightActionLoginPanel;
+
+        private Button loginBtn;
+
+        private Label errorMessage;
+
+        private PictureBox loadingImage;
+
+        private Panel fieldsLoginPanel;
+
+        private Panel fieldPasswordPanel;
+
+        private Panel inputPasswordFieldPanel;
+
+        private TextBox passwordInput;
+
+        private Panel labelPasswordFieldPanel;
+
+        private Label passwordLabel;
+
+        private Panel fieldEmailPanel;
+
+        private Panel labelEmailFieldPanel;
+
+        private ComboBox emailListSelect;
+
+        private Panel selectEmailFieldPanel;
+
+        private Label emailLabel;
+
+        private Panel hostFieldPanel;
+
+        private Panel inputHostPanel;
+
+        private TextBox hostInput;
+
+        private Panel labelFieldHostPanel;
+
+        private Label hostLabel;
+
+        private Panel titleLoginPanel;
+
+        private Panel bottomTitleLoginPanel;
+
+        private Label infoPlugin;
+
+        private Panel topTitleLoginPanel;
+
+        private Label titlePlugin;
+
+        private Panel formGeneralPanel;
+
+        public accountForm()
+        {
+            this.InitializeComponent();
+            foreach (Account informationAcount in Globals.ThisAddIn.GetInformationAcounts())
+            {
+                try
+                {
+                    this.emailListSelect.Items.Add(informationAcount.DisplayName);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+            try
+            {
+                string str = Globals.ThisAddIn.CheckDefaultLogin();
+                if (str == null)
+                {
+                    this.emailListSelect.SelectedIndex = 0;
+                }
+                else
+                {
+                    this.emailListSelect.SelectedIndex = this.emailListSelect.Items.IndexOf(str);
+                }
+                this.hostInput.Text = Settings.Default.host;
+                this.errorMessage.Hide();
+                this.loadingImage.Hide();
+                this.logoutPanel.Hide();
+                this.hostData.Text = Settings.Default.host;
+                this.emailData.Text = Settings.Default.email;
+            }
+            catch (Exception exception1)
+            {
+                MessageBox.Show(exception1.Message);
+            }
+        }
+
+        private void cancelLoginForm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                base.Invoke(new MethodInvoker(() => base.Close()));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void cancelLogoutBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                base.Invoke(new MethodInvoker(() => base.Close()));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public void closeForm()
+        {
+            try
+            {
+                base.Invoke(new MethodInvoker(() => base.Close()));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if ((!disposing ? false : this.components != null))
+            {
+                this.components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(accountForm));
+            this.leftLogoPanel = new Panel();
+            this.logoPlugin = new PictureBox();
+            this.rightFormPanel = new Panel();
+            this.logoutPanel = new Panel();
+            this.actionsLogoutPanel = new Panel();
+            this.rightActionLogoutPanel = new Panel();
+            this.logoutBtn = new Button();
+            this.leftActionLogoutPanel = new Panel();
+            this.cancelLogoutBtn = new Button();
+            this.emailData = new Label();
+            this.hostData = new Label();
+            this.infoLogoutForm = new Label();
+            this.titleFormLogout = new Label();
+            this.emailLabelLogout = new Label();
+            this.hostLabelLogout = new Label();
+            this.formLoginPanel = new Panel();
+            this.actionLoginPanel = new Panel();
+            this.btnAreaLogin = new Panel();
+            this.leftActionLoginPanel = new Panel();
+            this.cancelLoginForm = new Button();
+            this.rightActionLoginPanel = new Panel();
+            this.loginBtn = new Button();
+            this.errorMessage = new Label();
+            this.loadingImage = new PictureBox();
+            this.fieldsLoginPanel = new Panel();
+            this.fieldPasswordPanel = new Panel();
+            this.inputPasswordFieldPanel = new Panel();
+            this.passwordInput = new TextBox();
+            this.labelPasswordFieldPanel = new Panel();
+            this.passwordLabel = new Label();
+            this.fieldEmailPanel = new Panel();
+            this.labelEmailFieldPanel = new Panel();
+            this.emailListSelect = new ComboBox();
+            this.selectEmailFieldPanel = new Panel();
+            this.emailLabel = new Label();
+            this.hostFieldPanel = new Panel();
+            this.inputHostPanel = new Panel();
+            this.hostInput = new TextBox();
+            this.labelFieldHostPanel = new Panel();
+            this.hostLabel = new Label();
+            this.titleLoginPanel = new Panel();
+            this.bottomTitleLoginPanel = new Panel();
+            this.infoPlugin = new Label();
+            this.topTitleLoginPanel = new Panel();
+            this.titlePlugin = new Label();
+            this.formGeneralPanel = new Panel();
+            this.leftLogoPanel.SuspendLayout();
+            ((ISupportInitialize)this.logoPlugin).BeginInit();
+            this.rightFormPanel.SuspendLayout();
+            this.logoutPanel.SuspendLayout();
+            this.actionsLogoutPanel.SuspendLayout();
+            this.rightActionLogoutPanel.SuspendLayout();
+            this.leftActionLogoutPanel.SuspendLayout();
+            this.formLoginPanel.SuspendLayout();
+            this.actionLoginPanel.SuspendLayout();
+            this.btnAreaLogin.SuspendLayout();
+            this.leftActionLoginPanel.SuspendLayout();
+            this.rightActionLoginPanel.SuspendLayout();
+            ((ISupportInitialize)this.loadingImage).BeginInit();
+            this.fieldsLoginPanel.SuspendLayout();
+            this.fieldPasswordPanel.SuspendLayout();
+            this.inputPasswordFieldPanel.SuspendLayout();
+            this.labelPasswordFieldPanel.SuspendLayout();
+            this.fieldEmailPanel.SuspendLayout();
+            this.labelEmailFieldPanel.SuspendLayout();
+            this.selectEmailFieldPanel.SuspendLayout();
+            this.hostFieldPanel.SuspendLayout();
+            this.inputHostPanel.SuspendLayout();
+            this.labelFieldHostPanel.SuspendLayout();
+            this.titleLoginPanel.SuspendLayout();
+            this.bottomTitleLoginPanel.SuspendLayout();
+            this.topTitleLoginPanel.SuspendLayout();
+            this.formGeneralPanel.SuspendLayout();
+            base.SuspendLayout();
+            this.leftLogoPanel.Controls.Add(this.logoPlugin);
+            this.leftLogoPanel.Dock = DockStyle.Left;
+            this.leftLogoPanel.Location = new Point(75, 70);
+            this.leftLogoPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.leftLogoPanel.Name = "leftLogoPanel";
+            this.leftLogoPanel.Size = new System.Drawing.Size(369, 342);
+            this.leftLogoPanel.TabIndex = 10;
+            this.logoPlugin.BackColor = Color.Transparent;
+            this.logoPlugin.Dock = DockStyle.Fill;
+            this.logoPlugin.Image = (Image)componentResourceManager.GetObject("logoPlugin.Image");
+            this.logoPlugin.Location = new Point(0, 0);
+            this.logoPlugin.Margin = new System.Windows.Forms.Padding(2);
+            this.logoPlugin.Name = "logoPlugin";
+            this.logoPlugin.Size = new System.Drawing.Size(369, 342);
+            this.logoPlugin.SizeMode = PictureBoxSizeMode.Zoom;
+            this.logoPlugin.TabIndex = 10;
+            this.logoPlugin.TabStop = false;
+            this.rightFormPanel.BackColor = Color.Transparent;
+            this.rightFormPanel.Controls.Add(this.logoutPanel);
+            this.rightFormPanel.Controls.Add(this.formLoginPanel);
+            this.rightFormPanel.Dock = DockStyle.Right;
+            this.rightFormPanel.Location = new Point(490, 70);
+            this.rightFormPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.rightFormPanel.Name = "rightFormPanel";
+            this.rightFormPanel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.rightFormPanel.Size = new System.Drawing.Size(357, 342);
+            this.rightFormPanel.TabIndex = 13;
+            this.logoutPanel.BackColor = Color.White;
+            this.logoutPanel.BorderStyle = BorderStyle.FixedSingle;
+            this.logoutPanel.Controls.Add(this.actionsLogoutPanel);
+            this.logoutPanel.Controls.Add(this.emailData);
+            this.logoutPanel.Controls.Add(this.hostData);
+            this.logoutPanel.Controls.Add(this.infoLogoutForm);
+            this.logoutPanel.Controls.Add(this.titleFormLogout);
+            this.logoutPanel.Controls.Add(this.emailLabelLogout);
+            this.logoutPanel.Controls.Add(this.hostLabelLogout);
+            this.logoutPanel.Cursor = Cursors.Arrow;
+            this.logoutPanel.Font = new System.Drawing.Font("Microsoft Tai Le", 7.875f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.logoutPanel.ForeColor = Color.DimGray;
+            this.logoutPanel.Location = new Point(0, 32);
+            this.logoutPanel.Name = "logoutPanel";
+            this.logoutPanel.Size = new System.Drawing.Size(347, 280);
+            this.logoutPanel.TabIndex = 12;
+            this.actionsLogoutPanel.Controls.Add(this.rightActionLogoutPanel);
+            this.actionsLogoutPanel.Controls.Add(this.leftActionLogoutPanel);
+            this.actionsLogoutPanel.Dock = DockStyle.Bottom;
+            this.actionsLogoutPanel.Location = new Point(0, 208);
+            this.actionsLogoutPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.actionsLogoutPanel.Name = "actionsLogoutPanel";
+            this.actionsLogoutPanel.Size = new System.Drawing.Size(345, 70);
+            this.actionsLogoutPanel.TabIndex = 13;
+            this.rightActionLogoutPanel.Controls.Add(this.logoutBtn);
+            this.rightActionLogoutPanel.Dock = DockStyle.Left;
+            this.rightActionLogoutPanel.Location = new Point(172, 0);
+            this.rightActionLogoutPanel.Name = "rightActionLogoutPanel";
+            this.rightActionLogoutPanel.Size = new System.Drawing.Size(172, 70);
+            this.rightActionLogoutPanel.TabIndex = 2;
+            this.logoutBtn.AutoSize = true;
+            this.logoutBtn.BackColor = Color.FromArgb(21, 17, 63);
+            this.logoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.logoutBtn.ForeColor = Color.White;
+            this.logoutBtn.Location = new Point(5, 20);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(86, 31);
+            this.logoutBtn.TabIndex = 5;
+            this.logoutBtn.Text = "Logout";
+            this.logoutBtn.UseVisualStyleBackColor = false;
+            this.logoutBtn.Click += new EventHandler(this.logoutBtn_Click);
+            this.leftActionLogoutPanel.Controls.Add(this.cancelLogoutBtn);
+            this.leftActionLogoutPanel.Dock = DockStyle.Left;
+            this.leftActionLogoutPanel.Location = new Point(0, 0);
+            this.leftActionLogoutPanel.Name = "leftActionLogoutPanel";
+            this.leftActionLogoutPanel.Size = new System.Drawing.Size(172, 70);
+            this.leftActionLogoutPanel.TabIndex = 1;
+            this.cancelLogoutBtn.BackColor = Color.Gray;
+            this.cancelLogoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.cancelLogoutBtn.ForeColor = Color.White;
+            this.cancelLogoutBtn.Location = new Point(89, 20);
+            this.cancelLogoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelLogoutBtn.Name = "cancelLogoutBtn";
+            this.cancelLogoutBtn.Size = new System.Drawing.Size(78, 31);
+            this.cancelLogoutBtn.TabIndex = 12;
+            this.cancelLogoutBtn.Text = "Cancel";
+            this.cancelLogoutBtn.UseVisualStyleBackColor = false;
+            this.cancelLogoutBtn.Click += new EventHandler(this.cancelLogoutBtn_Click);
+            this.emailData.AutoSize = true;
+            this.emailData.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.emailData.Location = new Point(24, 175);
+            this.emailData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailData.Name = "emailData";
+            this.emailData.Size = new System.Drawing.Size(133, 18);
+            this.emailData.TabIndex = 12;
+            this.emailData.Text = "example@gmail.com";
+            this.hostData.AutoSize = true;
+            this.hostData.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.hostData.Location = new Point(24, 125);
+            this.hostData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hostData.Name = "hostData";
+            this.hostData.Size = new System.Drawing.Size(98, 18);
+            this.hostData.TabIndex = 11;
+            this.hostData.Text = "http://arc.bigin";
+            this.hostData.TextAlign = ContentAlignment.MiddleCenter;
+            this.infoLogoutForm.Dock = DockStyle.Top;
+            this.infoLogoutForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.infoLogoutForm.Location = new Point(0, 56);
+            this.infoLogoutForm.Name = "infoLogoutForm";
+            this.infoLogoutForm.Size = new System.Drawing.Size(345, 31);
+            this.infoLogoutForm.TabIndex = 10;
+            this.infoLogoutForm.Text = "You are connecting to ARC server with account:";
+            this.infoLogoutForm.TextAlign = ContentAlignment.MiddleCenter;
+            this.titleFormLogout.Dock = DockStyle.Top;
+            this.titleFormLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 24f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.titleFormLogout.Location = new Point(0, 0);
+            this.titleFormLogout.Name = "titleFormLogout";
+            this.titleFormLogout.Size = new System.Drawing.Size(345, 56);
+            this.titleFormLogout.TabIndex = 9;
+            this.titleFormLogout.Text = "ARC Outlook";
+            this.titleFormLogout.TextAlign = ContentAlignment.BottomCenter;
+            this.emailLabelLogout.AutoSize = true;
+            this.emailLabelLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.emailLabelLogout.Location = new Point(18, 155);
+            this.emailLabelLogout.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailLabelLogout.Name = "emailLabelLogout";
+            this.emailLabelLogout.Size = new System.Drawing.Size(47, 17);
+            this.emailLabelLogout.TabIndex = 3;
+            this.emailLabelLogout.Text = "Email";
+            this.hostLabelLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.hostLabelLogout.Location = new Point(18, 105);
+            this.hostLabelLogout.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hostLabelLogout.Name = "hostLabelLogout";
+            this.hostLabelLogout.Size = new System.Drawing.Size(84, 16);
+            this.hostLabelLogout.TabIndex = 7;
+            this.hostLabelLogout.Text = "Host Server";
+            this.formLoginPanel.AutoSize = true;
+            this.formLoginPanel.BackColor = Color.White;
+            this.formLoginPanel.Controls.Add(this.actionLoginPanel);
+            this.formLoginPanel.Controls.Add(this.loadingImage);
+            this.formLoginPanel.Controls.Add(this.fieldsLoginPanel);
+            this.formLoginPanel.Controls.Add(this.titleLoginPanel);
+            this.formLoginPanel.Cursor = Cursors.Arrow;
+            this.formLoginPanel.Dock = DockStyle.Fill;
+            this.formLoginPanel.Font = new System.Drawing.Font("Microsoft Tai Le", 7.875f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.formLoginPanel.ForeColor = Color.DimGray;
+            this.formLoginPanel.Location = new Point(10, 0);
+            this.formLoginPanel.Name = "formLoginPanel";
+            this.formLoginPanel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.formLoginPanel.Size = new System.Drawing.Size(337, 332);
+            this.formLoginPanel.TabIndex = 9;
+            this.actionLoginPanel.BackColor = Color.White;
+            this.actionLoginPanel.Controls.Add(this.btnAreaLogin);
+            this.actionLoginPanel.Controls.Add(this.errorMessage);
+            this.actionLoginPanel.Dock = DockStyle.Top;
+            this.actionLoginPanel.Location = new Point(0, 263);
+            this.actionLoginPanel.Name = "actionLoginPanel";
+            this.actionLoginPanel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.actionLoginPanel.Size = new System.Drawing.Size(337, 68);
+            this.actionLoginPanel.TabIndex = 16;
+            this.btnAreaLogin.Controls.Add(this.leftActionLoginPanel);
+            this.btnAreaLogin.Controls.Add(this.rightActionLoginPanel);
+            this.btnAreaLogin.Dock = DockStyle.Top;
+            this.btnAreaLogin.Location = new Point(0, 10);
+            this.btnAreaLogin.Name = "btnAreaLogin";
+            this.btnAreaLogin.Size = new System.Drawing.Size(337, 39);
+            this.btnAreaLogin.TabIndex = 0;
+            this.leftActionLoginPanel.BackColor = Color.White;
+            this.leftActionLoginPanel.Controls.Add(this.cancelLoginForm);
+            this.leftActionLoginPanel.Dock = DockStyle.Left;
+            this.leftActionLoginPanel.Location = new Point(0, 0);
+            this.leftActionLoginPanel.Name = "leftActionLoginPanel";
+            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.leftActionLoginPanel.Size = new System.Drawing.Size(168, 39);
+            this.leftActionLoginPanel.TabIndex = 0;
+            this.cancelLoginForm.BackColor = Color.Gray;
+            this.cancelLoginForm.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.cancelLoginForm.ForeColor = Color.White;
+            this.cancelLoginForm.Location = new Point(88, 3);
+            this.cancelLoginForm.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelLoginForm.Name = "cancelLoginForm";
+            this.cancelLoginForm.Size = new System.Drawing.Size(78, 29);
+            this.cancelLoginForm.TabIndex = 12;
+            this.cancelLoginForm.Text = "Cancel";
+            this.cancelLoginForm.UseVisualStyleBackColor = false;
+            this.cancelLoginForm.Click += new EventHandler(this.cancelLoginForm_Click);
+            this.rightActionLoginPanel.Controls.Add(this.loginBtn);
+            this.rightActionLoginPanel.Dock = DockStyle.Right;
+            this.rightActionLoginPanel.Location = new Point(169, 0);
+            this.rightActionLoginPanel.Name = "rightActionLoginPanel";
+            this.rightActionLoginPanel.Size = new System.Drawing.Size(168, 39);
+            this.rightActionLoginPanel.TabIndex = 1;
+            this.loginBtn.BackColor = Color.FromArgb(21, 17, 63);
+            this.loginBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.loginBtn.ForeColor = Color.White;
+            this.loginBtn.Location = new Point(2, 3);
+            this.loginBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(86, 29);
+            this.loginBtn.TabIndex = 5;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new EventHandler(this.loginBtn_Click);
+            this.errorMessage.BackColor = Color.Transparent;
+            this.errorMessage.Dock = DockStyle.Bottom;
+            this.errorMessage.FlatStyle = FlatStyle.Flat;
+            this.errorMessage.ForeColor = Color.Red;
+            this.errorMessage.Location = new Point(0, 44);
+            this.errorMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.errorMessage.Name = "errorMessage";
+            this.errorMessage.Size = new System.Drawing.Size(337, 24);
+            this.errorMessage.TabIndex = 14;
+            this.errorMessage.Text = "Login fail, please check info again!";
+            this.errorMessage.TextAlign = ContentAlignment.MiddleCenter;
+            this.loadingImage.BackColor = Color.Transparent;
+            this.loadingImage.BackgroundImageLayout = ImageLayout.Center;
+            this.loadingImage.Image = (Image)componentResourceManager.GetObject("loadingImage.Image");
+            this.loadingImage.Location = new Point(0, 263);
+            this.loadingImage.Name = "loadingImage";
+            this.loadingImage.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
+            this.loadingImage.Size = new System.Drawing.Size(337, 65);
+            this.loadingImage.SizeMode = PictureBoxSizeMode.CenterImage;
+            this.loadingImage.TabIndex = 11;
+            this.loadingImage.TabStop = false;
+            this.fieldsLoginPanel.Controls.Add(this.fieldPasswordPanel);
+            this.fieldsLoginPanel.Controls.Add(this.fieldEmailPanel);
+            this.fieldsLoginPanel.Controls.Add(this.hostFieldPanel);
+            this.fieldsLoginPanel.Dock = DockStyle.Top;
+            this.fieldsLoginPanel.Location = new Point(0, 88);
+            this.fieldsLoginPanel.Name = "fieldsLoginPanel";
+            this.fieldsLoginPanel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.fieldsLoginPanel.Size = new System.Drawing.Size(337, 175);
+            this.fieldsLoginPanel.TabIndex = 15;
+            this.fieldPasswordPanel.Controls.Add(this.inputPasswordFieldPanel);
+            this.fieldPasswordPanel.Controls.Add(this.labelPasswordFieldPanel);
+            this.fieldPasswordPanel.Dock = DockStyle.Top;
+            this.fieldPasswordPanel.Location = new Point(5, 120);
+            this.fieldPasswordPanel.Name = "fieldPasswordPanel";
+            this.fieldPasswordPanel.Size = new System.Drawing.Size(327, 50);
+            this.fieldPasswordPanel.TabIndex = 2;
+            this.inputPasswordFieldPanel.Controls.Add(this.passwordInput);
+            this.inputPasswordFieldPanel.Dock = DockStyle.Top;
+            this.inputPasswordFieldPanel.Location = new Point(0, 20);
+            this.inputPasswordFieldPanel.Name = "inputPasswordFieldPanel";
+            this.inputPasswordFieldPanel.Size = new System.Drawing.Size(327, 30);
+            this.inputPasswordFieldPanel.TabIndex = 1;
+            this.passwordInput.Dock = DockStyle.Fill;
+            this.passwordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.passwordInput.Location = new Point(0, 0);
+            this.passwordInput.Margin = new System.Windows.Forms.Padding(2);
+            this.passwordInput.Name = "passwordInput";
+            this.passwordInput.Size = new System.Drawing.Size(327, 26);
+            this.passwordInput.TabIndex = 1;
+            this.passwordInput.UseSystemPasswordChar = true;
+            this.labelPasswordFieldPanel.Controls.Add(this.passwordLabel);
+            this.labelPasswordFieldPanel.Dock = DockStyle.Top;
+            this.labelPasswordFieldPanel.Location = new Point(0, 0);
+            this.labelPasswordFieldPanel.Name = "labelPasswordFieldPanel";
+            this.labelPasswordFieldPanel.Size = new System.Drawing.Size(327, 20);
+            this.labelPasswordFieldPanel.TabIndex = 0;
+            this.passwordLabel.Dock = DockStyle.Fill;
+            this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.passwordLabel.Location = new Point(0, 0);
+            this.passwordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(327, 20);
+            this.passwordLabel.TabIndex = 4;
+            this.passwordLabel.Text = "Password";
+            this.fieldEmailPanel.Controls.Add(this.labelEmailFieldPanel);
+            this.fieldEmailPanel.Controls.Add(this.selectEmailFieldPanel);
+            this.fieldEmailPanel.Dock = DockStyle.Top;
+            this.fieldEmailPanel.Location = new Point(5, 60);
+            this.fieldEmailPanel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.fieldEmailPanel.Name = "fieldEmailPanel";
+            this.fieldEmailPanel.Size = new System.Drawing.Size(327, 60);
+            this.fieldEmailPanel.TabIndex = 1;
+            this.labelEmailFieldPanel.Controls.Add(this.emailListSelect);
+            this.labelEmailFieldPanel.Dock = DockStyle.Top;
+            this.labelEmailFieldPanel.Location = new Point(0, 20);
+            this.labelEmailFieldPanel.Name = "labelEmailFieldPanel";
+            this.labelEmailFieldPanel.Size = new System.Drawing.Size(327, 30);
+            this.labelEmailFieldPanel.TabIndex = 1;
+            this.emailListSelect.Dock = DockStyle.Fill;
+            this.emailListSelect.DropDownHeight = 120;
+            this.emailListSelect.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.emailListSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.emailListSelect.FormattingEnabled = true;
+            this.emailListSelect.IntegralHeight = false;
+            this.emailListSelect.ItemHeight = 20;
+            this.emailListSelect.Location = new Point(0, 0);
+            this.emailListSelect.Margin = new System.Windows.Forms.Padding(2);
+            this.emailListSelect.Name = "emailListSelect";
+            this.emailListSelect.Size = new System.Drawing.Size(327, 28);
+            this.emailListSelect.TabIndex = 2;
+            this.selectEmailFieldPanel.Controls.Add(this.emailLabel);
+            this.selectEmailFieldPanel.Dock = DockStyle.Top;
+            this.selectEmailFieldPanel.Location = new Point(0, 0);
+            this.selectEmailFieldPanel.Name = "selectEmailFieldPanel";
+            this.selectEmailFieldPanel.Size = new System.Drawing.Size(327, 20);
+            this.selectEmailFieldPanel.TabIndex = 0;
+            this.emailLabel.Dock = DockStyle.Fill;
+            this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.emailLabel.Location = new Point(0, 0);
+            this.emailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(327, 20);
+            this.emailLabel.TabIndex = 3;
+            this.emailLabel.Text = "Email";
+            this.hostFieldPanel.Controls.Add(this.inputHostPanel);
+            this.hostFieldPanel.Controls.Add(this.labelFieldHostPanel);
+            this.hostFieldPanel.Dock = DockStyle.Top;
+            this.hostFieldPanel.Location = new Point(5, 0);
+            this.hostFieldPanel.Name = "hostFieldPanel";
+            this.hostFieldPanel.Size = new System.Drawing.Size(327, 60);
+            this.hostFieldPanel.TabIndex = 0;
+            this.inputHostPanel.Controls.Add(this.hostInput);
+            this.inputHostPanel.Dock = DockStyle.Top;
+            this.inputHostPanel.Location = new Point(0, 20);
+            this.inputHostPanel.Name = "inputHostPanel";
+            this.inputHostPanel.Size = new System.Drawing.Size(327, 30);
+            this.inputHostPanel.TabIndex = 1;
+            this.hostInput.Dock = DockStyle.Fill;
+            this.hostInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.hostInput.Location = new Point(0, 0);
+            this.hostInput.Name = "hostInput";
+            this.hostInput.Size = new System.Drawing.Size(327, 26);
+            this.hostInput.TabIndex = 8;
+            this.labelFieldHostPanel.Controls.Add(this.hostLabel);
+            this.labelFieldHostPanel.Dock = DockStyle.Top;
+            this.labelFieldHostPanel.Location = new Point(0, 0);
+            this.labelFieldHostPanel.Name = "labelFieldHostPanel";
+            this.labelFieldHostPanel.Size = new System.Drawing.Size(327, 20);
+            this.labelFieldHostPanel.TabIndex = 0;
+            this.hostLabel.Dock = DockStyle.Fill;
+            this.hostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Bold, GraphicsUnit.Point, 0);
+            this.hostLabel.Location = new Point(0, 0);
+            this.hostLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hostLabel.Name = "hostLabel";
+            this.hostLabel.Size = new System.Drawing.Size(327, 20);
+            this.hostLabel.TabIndex = 7;
+            this.hostLabel.Text = "Host Server";
+            this.titleLoginPanel.Controls.Add(this.bottomTitleLoginPanel);
+            this.titleLoginPanel.Controls.Add(this.topTitleLoginPanel);
+            this.titleLoginPanel.Dock = DockStyle.Top;
+            this.titleLoginPanel.Location = new Point(0, 10);
+            this.titleLoginPanel.Name = "titleLoginPanel";
+            this.titleLoginPanel.Size = new System.Drawing.Size(337, 78);
+            this.titleLoginPanel.TabIndex = 14;
+            this.bottomTitleLoginPanel.Controls.Add(this.infoPlugin);
+            this.bottomTitleLoginPanel.Dock = DockStyle.Bottom;
+            this.bottomTitleLoginPanel.Location = new Point(0, 46);
+            this.bottomTitleLoginPanel.Name = "bottomTitleLoginPanel";
+            this.bottomTitleLoginPanel.Size = new System.Drawing.Size(337, 32);
+            this.bottomTitleLoginPanel.TabIndex = 12;
+            this.infoPlugin.Dock = DockStyle.Fill;
+            this.infoPlugin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.infoPlugin.Location = new Point(0, 0);
+            this.infoPlugin.Name = "infoPlugin";
+            this.infoPlugin.Size = new System.Drawing.Size(337, 32);
+            this.infoPlugin.TabIndex = 10;
+            this.infoPlugin.Text = "Sign in to connect your outlook to ARC server";
+            this.infoPlugin.TextAlign = ContentAlignment.TopCenter;
+            this.topTitleLoginPanel.Controls.Add(this.titlePlugin);
+            this.topTitleLoginPanel.Dock = DockStyle.Top;
+            this.topTitleLoginPanel.Location = new Point(0, 0);
+            this.topTitleLoginPanel.Name = "topTitleLoginPanel";
+            this.topTitleLoginPanel.Size = new System.Drawing.Size(337, 40);
+            this.topTitleLoginPanel.TabIndex = 12;
+            this.titlePlugin.Dock = DockStyle.Fill;
+            this.titlePlugin.Font = new System.Drawing.Font("Microsoft Sans Serif", 24f, FontStyle.Regular, GraphicsUnit.Point, 0);
+            this.titlePlugin.Location = new Point(0, 0);
+            this.titlePlugin.Name = "titlePlugin";
+            this.titlePlugin.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.titlePlugin.Size = new System.Drawing.Size(337, 40);
+            this.titlePlugin.TabIndex = 9;
+            this.titlePlugin.Text = "ARC Outlook";
+            this.titlePlugin.TextAlign = ContentAlignment.BottomCenter;
+            this.titlePlugin.UseMnemonic = false;
+            this.formGeneralPanel.AutoSize = true;
+            this.formGeneralPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.formGeneralPanel.BackColor = Color.Transparent;
+            this.formGeneralPanel.Controls.Add(this.rightFormPanel);
+            this.formGeneralPanel.Controls.Add(this.leftLogoPanel);
+            this.formGeneralPanel.Dock = DockStyle.Fill;
+            this.formGeneralPanel.Location = new Point(3, 3);
+            this.formGeneralPanel.Margin = new System.Windows.Forms.Padding(25, 26, 25, 26);
+            this.formGeneralPanel.Name = "formGeneralPanel";
+            this.formGeneralPanel.Padding = new System.Windows.Forms.Padding(75, 70, 75, 70);
+            this.formGeneralPanel.Size = new System.Drawing.Size(922, 482);
+            this.formGeneralPanel.TabIndex = 11;
+            base.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            base.AutoScaleDimensions = new SizeF(6f, 13f);
+            base.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.BackgroundImage = (Image)componentResourceManager.GetObject("$this.BackgroundImage");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            base.ClientSize = new System.Drawing.Size(928, 488);
+            base.ControlBox = false;
+            base.Controls.Add(this.formGeneralPanel);
+            this.Cursor = Cursors.Arrow;
+            base.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            base.Icon = (System.Drawing.Icon)componentResourceManager.GetObject("$this.Icon");
+            base.ImeMode = System.Windows.Forms.ImeMode.Off;
+            base.Margin = new System.Windows.Forms.Padding(2);
+            base.Name = "accountForm";
+            base.Padding = new System.Windows.Forms.Padding(3);
+            base.StartPosition = FormStartPosition.CenterScreen;
+            this.Text = "ARC Outlook Plugin";
+            base.TopMost = true;
+            this.leftLogoPanel.ResumeLayout(false);
+            ((ISupportInitialize)this.logoPlugin).EndInit();
+            this.rightFormPanel.ResumeLayout(false);
+            this.rightFormPanel.PerformLayout();
+            this.logoutPanel.ResumeLayout(false);
+            this.logoutPanel.PerformLayout();
+            this.actionsLogoutPanel.ResumeLayout(false);
+            this.rightActionLogoutPanel.ResumeLayout(false);
+            this.rightActionLogoutPanel.PerformLayout();
+            this.leftActionLogoutPanel.ResumeLayout(false);
+            this.formLoginPanel.ResumeLayout(false);
+            this.actionLoginPanel.ResumeLayout(false);
+            this.btnAreaLogin.ResumeLayout(false);
+            this.leftActionLoginPanel.ResumeLayout(false);
+            this.rightActionLoginPanel.ResumeLayout(false);
+            ((ISupportInitialize)this.loadingImage).EndInit();
+            this.fieldsLoginPanel.ResumeLayout(false);
+            this.fieldPasswordPanel.ResumeLayout(false);
+            this.inputPasswordFieldPanel.ResumeLayout(false);
+            this.inputPasswordFieldPanel.PerformLayout();
+            this.labelPasswordFieldPanel.ResumeLayout(false);
+            this.fieldEmailPanel.ResumeLayout(false);
+            this.labelEmailFieldPanel.ResumeLayout(false);
+            this.selectEmailFieldPanel.ResumeLayout(false);
+            this.hostFieldPanel.ResumeLayout(false);
+            this.inputHostPanel.ResumeLayout(false);
+            this.inputHostPanel.PerformLayout();
+            this.labelFieldHostPanel.ResumeLayout(false);
+            this.titleLoginPanel.ResumeLayout(false);
+            this.bottomTitleLoginPanel.ResumeLayout(false);
+            this.topTitleLoginPanel.ResumeLayout(false);
+            this.formGeneralPanel.ResumeLayout(false);
+            base.ResumeLayout(false);
+            base.PerformLayout();
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if ((this.hostInput.Text.Contains("http://") ? false : !this.hostInput.Text.Contains("https://")))
+                {
+                    this.errorMessage.Text = "Host servers must be a full path, example: http://example.com";
+                    this.errorMessage.Show();
+                }
+                else
+                {
+                    this.errorMessage.Hide();
+                    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+                    jsonObject.Add("host", this.hostInput.Text);
+                    jsonObject.Add("email", this.emailListSelect.Text);
+                    jsonObject.Add("password", this.passwordInput.Text);
+                    this.actionLoginPanel.Hide();
+                    this.loadingImage.Show();
+                    Globals.ThisAddIn.SendRequestLogin(jsonObject);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                base.Invoke(new MethodInvoker(() => {
+                    base.Close();
+                    Globals.ThisAddIn.TriggerLogoutBtn(this.hostData.Text, this.emailData.Text);
+                }));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public void showError()
+        {
+            try
+            {
+                if (!(System.Windows.Forms.Application.OpenForms["accountForm"] is accountForm))
+                {
+                    this.loadingImage.Hide();
+                    this.actionLoginPanel.Show();
+                    this.errorMessage.Show();
+                    base.Show();
+                }
+                else
+                {
+                    base.Invoke(new MethodInvoker(() => {
+                        this.loadingImage.Hide();
+                        this.actionLoginPanel.Show();
+                        this.errorMessage.Show();
+                    }));
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public void showLogin()
+        {
+            try
+            {
+                if (!(System.Windows.Forms.Application.OpenForms["accountForm"] is accountForm))
+                {
+                    base.Show();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        public void ShowLogout()
+        {
+            try
+            {
+                if (!(System.Windows.Forms.Application.OpenForms["accountForm"] is accountForm))
+                {
+                    this.formLoginPanel.Hide();
+                    this.logoutPanel.Show();
+                    base.Show();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string text = this.emailListSelect.Text;
+            string str = this.passwordInput.Text;
+        }
+    }
+}

@@ -3,19 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="host" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a</Value>
+      <Value Profile="(Default)">https://arc-dev.bigin.top</Value>
     </Setting>
     <Setting Name="email" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="token" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="tmpHost" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="tmpEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)">a</Value>
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="timeUpdate" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1800000</Value>
     </Setting>
   </Settings>
 </SettingsFile>

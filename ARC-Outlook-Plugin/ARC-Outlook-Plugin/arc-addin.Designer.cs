@@ -35,54 +35,61 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(arc_addin));
-            this.arc_tab = this.Factory.CreateRibbonTab();
+            this.tab2 = this.Factory.CreateRibbonTab();
             this.arc_btn_group = this.Factory.CreateRibbonGroup();
-            this.arc_btn = this.Factory.CreateRibbonButton();
-            this.arc_tab.SuspendLayout();
-            this.arc_btn_group.SuspendLayout();
+            this.tab1 = this.Factory.CreateRibbonTab();
+            this.tab3 = this.Factory.CreateRibbonTab();
+            this.tab2.SuspendLayout();
+            this.tab1.SuspendLayout();
+            this.tab3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // arc_tab
+            // tab2
             // 
-            this.arc_tab.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.arc_tab.ControlId.OfficeId = "ArcTabAddin";
-            this.arc_tab.Groups.Add(this.arc_btn_group);
-            this.arc_tab.Label = "Arc - Plugin";
-            this.arc_tab.Name = "arc_tab";
+            this.tab2.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.tab2.ControlId.OfficeId = "tab2";
+            this.tab2.Groups.Add(this.arc_btn_group);
+            resources.ApplyResources(this.tab2, "tab2");
+            this.tab2.Name = "tab2";
             // 
             // arc_btn_group
             // 
-            this.arc_btn_group.Items.Add(this.arc_btn);
-            this.arc_btn_group.Label = "ARC Group";
+            resources.ApplyResources(this.arc_btn_group, "arc_btn_group");
             this.arc_btn_group.Name = "arc_btn_group";
             // 
-            // arc_btn
+            // tab1
             // 
-            this.arc_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.arc_btn.Image = ((System.Drawing.Image)(resources.GetObject("arc_btn.Image")));
-            this.arc_btn.Label = "ARC";
-            this.arc_btn.Name = "arc_btn";
-            this.arc_btn.ShowImage = true;
+            resources.ApplyResources(this.tab1, "tab1");
+            this.tab1.Name = "tab1";
+            // 
+            // tab3
+            // 
+            resources.ApplyResources(this.tab3, "tab3");
+            this.tab3.Name = "tab3";
             // 
             // arc_addin
             // 
             this.Name = "arc_addin";
             this.RibbonType = "Microsoft.Outlook.Explorer";
-            this.Tabs.Add(this.arc_tab);
+            this.Tabs.Add(this.tab1);
+            this.Tabs.Add(this.tab2);
+            this.Tabs.Add(this.tab3);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.arc_addin_Load);
-            this.arc_tab.ResumeLayout(false);
-            this.arc_tab.PerformLayout();
-            this.arc_btn_group.ResumeLayout(false);
-            this.arc_btn_group.PerformLayout();
+            this.tab2.ResumeLayout(false);
+            this.tab2.PerformLayout();
+            this.tab1.ResumeLayout(false);
+            this.tab1.PerformLayout();
+            this.tab3.ResumeLayout(false);
+            this.tab3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab arc_tab;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup arc_btn_group;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton arc_btn;
+        private Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
+        private Microsoft.Office.Tools.Ribbon.RibbonTab tab2;
+        private Microsoft.Office.Tools.Ribbon.RibbonTab tab3;
     }
 
     partial class ThisRibbonCollection

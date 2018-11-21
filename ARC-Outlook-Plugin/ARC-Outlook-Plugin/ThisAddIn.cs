@@ -73,9 +73,96 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Start Error: ");
             }
         }
+
+        public void StartupCheckLogin()
+        {
+            try
+            {
+                if ((Settings.Default.token == null ? true : Settings.Default.token == ""))
+                {
+                    this.showAccountForm(false);
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        //public static void CheckProcessEmail()
+        //{
+        //    if ((Settings.Default.token == null ? false : Settings.Default.token != ""))
+        //    {
+        //        try
+        //        {
+        //            string @default = Settings.Default.host;
+        //            string str = Settings.Default.email;
+        //            string str1 = string.Concat(@default, "/api/mail/syncProcessEmail?email_user=", str);
+        //            HttpClient httpClient = new HttpClient();
+        //            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+        //            HttpResponseMessage result = httpClient.GetAsync(str1).Result;
+        //            Task<string> task = result.Content.ReadAsStringAsync();
+        //            dynamic obj = JObject.Parse(task.Result).data;
+        //            if (obj != (dynamic)null)
+        //            {
+        //                foreach (dynamic obj1 in (IEnumerable)obj)
+        //                {
+        //                    dynamic obj2 = obj1.id;
+        //                    dynamic obj3 = obj1.attachments;
+        //                    Microsoft.Office.Interop.Outlook.Application application = Globals.ThisAddIn.Application;
+        //                    RDOSession mAPIOBJECT = (RDOSession)Activator.CreateInstance(Marshal.GetTypeFromCLSID(new Guid("29AB7A12-B531-450E-8F7A-EA94C2F3C05F")));
+        //                    Store selectedStore = Globals.ThisAddIn.GetSelectedStore(Settings.Default.email);
+        //                    mAPIOBJECT.MAPIOBJECT = selectedStore.Session.MAPIOBJECT;
+        //                    RDOFolder defaultFolder = mAPIOBJECT.GetDefaultFolder(rdoDefaultFolders.olFolderSentMail);
+        //                    RDOMail now = defaultFolder.Items.Add("IPM.Note");
+        //                    now.Sent = true;
+        //                    now.SentOn = DateTime.Now;
+        //                    now.ReceivedTime = DateTime.Now;
+        //                    now.Subject = (string)obj1.subject;
+        //                    now.HTMLBody = (string)obj1.body;
+        //                    now.To = (string)obj1.to_addr;
+        //                    now.BCC = (string)obj1.bcc;
+        //                    now.CC = (string)obj1.cc;
+        //                    now.Recipients.Add(obj1.to_addr);
+        //                    now.Recipients.ResolveAll(Type.Missing, Type.Missing);
+        //                    now.SenderName = (string)obj1.from_name;
+        //                    now.SenderEmailAddress = (string)obj1.from_addr;
+        //                    dynamic obj4 = string.Concat(System.Windows.Forms.Application.LocalUserAppDataPath, "\\contentEmailSync\\mail_") + obj2;
+        //                    if ((dynamic)(!Directory.Exists(obj4)))
+        //                    {
+        //                        Directory.CreateDirectory(obj4);
+        //                    }
+        //                    if (obj3 != (dynamic)null)
+        //                    {
+        //                        foreach (dynamic obj5 in (IEnumerable)obj3)
+        //                        {
+        //                            if (obj5 != (dynamic)null)
+        //                            {
+        //                                string str2 = ((string)obj5.path_string).Replace("http://localhost", @default);
+        //                                now.Attachments.Add(str2, Type.Missing, Type.Missing, Type.Missing);
+        //                            }
+        //                        }
+        //                    }
+        //                    now.Save();
+        //                    string str3 = string.Concat(@default, "/api/mail/updateStatusEmailSync");
+        //                    HttpClient authenticationHeaderValue = new HttpClient();
+        //                    authenticationHeaderValue.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+        //                    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+        //                    jsonObject.Add("email_id", obj1.id.ToString());
+        //                    StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+        //                    HttpResponseMessage httpResponseMessage = authenticationHeaderValue.PostAsync(str3, stringContent).Result;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            MessageBox.Show(exception.Message);
+        //        }
+        //    }
+        //}
 
         public void EventCreateNewNoteAfterEmailSent()
         {
@@ -83,14 +170,14 @@ namespace ARC_Outlook_Plugin
             {
                 this.RemoveEventAfterEmailSent();
                 Store store = this.GetSelectedStore(Settings.Default.email);
-                Folder folder = store.GetDefaultFolder(OlDefaultFolders.olFolderSentMail) as Folder;
-                this._items = folder.Items;
-                bool flag = Settings.Default.token != null && Settings.Default.token != "";
-                if (flag)
-                {
-                    //new ComAwareEventInfo(typeof(Microsoft.Office.Interop.Outlook.ItemsEvents_Event), "ItemAdd").AddEventHandler(this._items, new ItemsEvents_ItemAddEventHandler(this, (UIntPtr)ldftn(Items_ItemAdd)));
-                    this._totalEventAdd++;
-                }
+                //Folder folder = store.GetDefaultFolder(OlDefaultFolders.olFolderSentMail) as Folder;
+                //this._items = folder.Items;
+                //bool flag = Settings.Default.token != null && Settings.Default.token != "";
+                //if (flag)
+                //{
+                //    //new ComAwareEventInfo(typeof(Microsoft.Office.Interop.Outlook.ItemsEvents_Event), "ItemAdd").AddEventHandler(this._items, new ItemsEvents_ItemAddEventHandler(this, (UIntPtr)ldftn(Items_ItemAdd)));
+                //    this._totalEventAdd++;
+                //}
             }
             catch (Exception ex)
             {
@@ -182,22 +269,17 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                Microsoft.Office.Interop.Outlook.Application application = this.Application;
-                Microsoft.Office.Interop.Outlook._NameSpace @namespace = application.GetNamespace("MAPI");
-                Stores stores = @namespace.Stores;
-                foreach (object obj in stores)
+                foreach (Store store in this.Application.GetNamespace("MAPI").Stores)
                 {
-                    Store store = (Store)obj;
-                    bool flag = store.DisplayName == account;
-                    if (flag)
+                    if (store.DisplayName == account)
                     {
                         this.selectedStore = store;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(exception.Message);
             }
             return this.selectedStore;
         }
@@ -235,18 +317,20 @@ namespace ARC_Outlook_Plugin
             try
             {
                 DirectoryInfo directoryInfo = new DirectoryInfo(System.Windows.Forms.Application.LocalUserAppDataPath);
-                foreach (FileInfo fileInfo in directoryInfo.GetFiles())
+                FileInfo[] files = directoryInfo.GetFiles();
+                for (int i = 0; i < (int)files.Length; i++)
                 {
-                    fileInfo.Delete();
+                    files[i].Delete();
                 }
-                foreach (DirectoryInfo directoryInfo2 in directoryInfo.GetDirectories())
+                DirectoryInfo[] directories = directoryInfo.GetDirectories();
+                for (int j = 0; j < (int)directories.Length; j++)
                 {
-                    directoryInfo2.Delete(true);
+                    directories[j].Delete(true);
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(exception.Message);
             }
         }
 
@@ -370,6 +454,138 @@ namespace ARC_Outlook_Plugin
             }
             return result;
         }
+
+        public void TriggerLogoutBtn(string host, string email)
+        {
+            try
+            {
+                this.ResetDefaultInfo(host, email);
+                //this._formAccount = new accountForm();
+                //this._formAccount.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        //public static string LoginAction(object objData)
+        //{
+        //    string thisAddIn;
+        //    dynamic obj = JObject.Parse(objData.ToString());
+        //    string str = (string)(obj.host.ToString() + "/api/mail/loginFromOutlook");
+        //    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+        //    jsonObject.Add("email", obj.email.ToString());
+        //    jsonObject.Add("password", obj.password.ToString());
+        //    HttpClient httpClient = new HttpClient();
+        //    StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+        //    Task<HttpResponseMessage> task = httpClient.PostAsync(str, stringContent);
+        //    HttpResponseMessage result = task.Result;
+        //    AggregateException exception = task.Exception;
+        //    TaskStatus status = task.Status;
+        //    if (!result.IsSuccessStatusCode)
+        //    {
+        //        thisAddIn = "fail";
+        //    }
+        //    else
+        //    {
+        //        Task<string> task1 = result.Content.ReadAsStringAsync();
+        //        if ((task1.Result == null || !(task1.Result != "") ? true : task1.Result == "\"\""))
+        //        {
+        //            thisAddIn = "fail";
+        //        }
+        //        else
+        //        {
+        //            dynamic obj1 = JObject.Parse(task1.Result);
+        //            Globals.ThisAddIn.resultLogin = obj1.data;
+        //            thisAddIn = (string)((dynamic)Globals.ThisAddIn.resultLogin).ToString();
+        //        }
+        //    }
+        //    if (thisAddIn == "fail")
+        //    {
+        //        Globals.ThisAddIn.ResetDefaultInfo(obj.host.ToString(), obj.email.ToString());
+        //    }
+        //    else
+        //    {
+        //        Globals.ThisAddIn.SaveYourInfo(obj.host.ToString(), obj.email.ToString(), ((dynamic)Globals.ThisAddIn.resultLogin).ToString());
+        //    }
+        //    Globals.ThisAddIn.EventCreateNewNoteAfterEmailSent();
+        //    return thisAddIn;
+        //}
+
+        //public static object ParseDataFromEmail(MailItem mail, int indexMail)
+        //{
+        //    string str = DateTime.Now.ToString("yyyyMMddHHmmss");
+        //    string str1 = string.Concat(System.Windows.Forms.Application.LocalUserAppDataPath, "\\contentEmailTemp\\mail_", str);
+        //    if (!Directory.Exists(str1))
+        //    {
+        //        Directory.CreateDirectory(str1);
+        //    }
+        //    string[] strArrays = new string[] { ".png", ".jpg", ".gif", ".bmp" };
+        //    string hTMLBody = null;
+        //    string str2 = string.Concat(new object[] { str1, "\\", str, "-attachments-", indexMail });
+        //    string str3 = string.Concat(new object[] { str, "-attachments-", indexMail, ".zip" });
+        //    string str4 = string.Concat(str1, "\\", str3);
+        //    string[] allReciptents = new string[0];
+        //    allReciptents = ThisAddIn.GetAllReciptents(mail);
+        //    hTMLBody = mail.HTMLBody;
+        //    foreach (Microsoft.Office.Interop.Outlook.Attachment attachment in mail.Attachments)
+        //    {
+        //        string base64String = null;
+        //        string str5 = string.Concat(str, "_", attachment.FileName);
+        //        string str6 = Path.GetExtension(string.Concat(str1, "\\", str5)).Replace(".", "");
+        //        string str7 = "http://schemas.microsoft.com/mapi/proptag/0x3712001E";
+        //        attachment.SaveAsFile(string.Concat(str1, "\\", str5));
+        //        string property = (string)((dynamic)attachment.PropertyAccessor.GetProperty(str7));
+        //        try
+        //        {
+        //            if (strArrays.Any<string>(new Func<string, bool>(attachment.FileName.Contains)))
+        //            {
+        //                using (Image image = Image.FromFile(string.Concat(str1, "\\", str5)))
+        //                {
+        //                    using (MemoryStream memoryStream = new MemoryStream())
+        //                    {
+        //                        image.Save(memoryStream, image.RawFormat);
+        //                        base64String = Convert.ToBase64String(memoryStream.ToArray());
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        catch (Exception exception)
+        //        {
+        //            MessageBox.Show(exception.Message);
+        //        }
+        //        try
+        //        {
+        //            if (property == "")
+        //            {
+        //                if (!Directory.Exists(str2))
+        //                {
+        //                    Directory.CreateDirectory(str2);
+        //                }
+        //                File.Move(string.Concat(str1, "\\", str5), string.Concat(str2, "\\", str5));
+        //            }
+        //            else if (hTMLBody.ToLower().Contains(string.Concat("cid:", property.ToLower())))
+        //            {
+        //                hTMLBody = hTMLBody.Replace(string.Concat("\"cid:", property, "\""), string.Concat("data:image/", str6, ";base64,", base64String));
+        //            }
+        //        }
+        //        catch (Exception exception1)
+        //        {
+        //            MessageBox.Show(exception1.Message);
+        //        }
+        //    }
+        //    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+        //    jsonObject.Add("body", hTMLBody);
+        //    jsonObject.Add("entry_id", mail.EntryID);
+        //    if (Directory.Exists(str2))
+        //    {
+        //        ZipFile.CreateFromDirectory(str2, str4);
+        //        jsonObject.Add("pathAttachment", str4);
+        //        jsonObject.Add("fileName", str3);
+        //    }
+        //    return jsonObject;
+        //}
 
         #region VSTO generated code
 

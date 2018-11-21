@@ -25,7 +25,7 @@ namespace ARC_Outlook_Plugin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://arc-dev.bigin.top")]
         public string host {
             get {
                 return ((string)(this["host"]));
@@ -37,7 +37,7 @@ namespace ARC_Outlook_Plugin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string email {
             get {
                 return ((string)(this["email"]));
@@ -49,7 +49,7 @@ namespace ARC_Outlook_Plugin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string token {
             get {
                 return ((string)(this["token"]));
@@ -61,7 +61,7 @@ namespace ARC_Outlook_Plugin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string tmpHost {
             get {
                 return ((string)(this["tmpHost"]));
@@ -73,13 +73,25 @@ namespace ARC_Outlook_Plugin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("a")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string tmpEmail {
             get {
                 return ((string)(this["tmpEmail"]));
             }
             set {
                 this["tmpEmail"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1800000")]
+        public int timeUpdate {
+            get {
+                return ((int)(this["timeUpdate"]));
+            }
+            set {
+                this["timeUpdate"] = value;
             }
         }
     }
