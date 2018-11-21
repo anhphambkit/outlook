@@ -6,9 +6,9 @@ using Microsoft.Office.Tools.Ribbon;
 
 namespace ARC_Outlook_Plugin
 {
-    public partial class Ribbon1
+    public partial class arc_addin
     {
-        private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
+        private void arc_addin_Load(object sender, RibbonUIEventArgs e)
         {
 
         }
