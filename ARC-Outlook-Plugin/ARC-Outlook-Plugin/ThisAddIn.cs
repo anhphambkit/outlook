@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using Office = Microsoft.Office.Core;
 using System.CodeDom.Compiler;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
-//using System.Json;
-using System.Linq;
+using System.Json;
 using System.Linq.Expressions;
-//using System.Net.Http;
-//using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
@@ -28,18 +30,19 @@ using Microsoft.Office.Tools;
 using Microsoft.Office.Tools.Outlook;
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using Exception = System.Exception;
-//using Newtonsoft.Json.Linq;
-//using Redemption;
+using Outlook = Microsoft.Office.Interop.Outlook;
+using Newtonsoft.Json.Linq;
+//using redemption;
 
 namespace ARC_Outlook_Plugin
 {
     public partial class ThisAddIn
     {
-        private Microsoft.Office.Interop.Outlook.Application oApp;
+        private Outlook.Application oApp;
         
-        private Microsoft.Office.Interop.Outlook._NameSpace oNS;
+        private Outlook._NameSpace oNS;
         
-        private Microsoft.Office.Interop.Outlook.MAPIFolder mailsFromThisFolder;
+        private Outlook.MAPIFolder mailsFromThisFolder;
         
         private LinkedResource theContent;
         
@@ -54,14 +57,14 @@ namespace ARC_Outlook_Plugin
         private int _totalEventAdd = 0;
 
         private Store selectedStore;
-
-        //private accountForm _formAccount;
-       
-        //private messageSuccess _messageSuccess;
         
+        //private messageSuccess _messageSuccess;
+
         private dynamic resultLogin;
 
         private string tmpResult;
+
+        private accountForm _formAccount;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -69,11 +72,11 @@ namespace ARC_Outlook_Plugin
             {
                 this.EventCreateNewNoteAfterEmailSent();
                 this.ThreadCallCheckSync();
-                //this.StartupCheckLogin();
+                this.StartupCheckLogin();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Start Error: ");
+                MessageBox.Show("Start Error: " + ex.Message);
             }
         }
 
@@ -88,7 +91,7 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("StartupCheckLogin: " + exception.Message);
             }
         }
 
@@ -189,15 +192,15 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                //this._formAccount = new accountForm();
+                this._formAccount = new accountForm();
                 bool flag = Settings.Default.token != null && Settings.Default.token != "";
                 if (flag)
                 {
-                    //this._formAccount.ShowLogout();
+                    this._formAccount.showLogout();
                 }
                 else
                 {
-                    //this._formAccount.showLogin();
+                    this._formAccount.showLogin();
                 }
             }
             catch (Exception ex)
@@ -361,20 +364,20 @@ namespace ARC_Outlook_Plugin
             }
         }
 
-        public async void SendRequestLogin(object objData)
+        public async void SendRequestLogin(JObject objData)
         {
             try
             {
-                //await Task.Run<string>(() => this.tmpResult = ThisAddIn.LoginAction(objData));
-                //if (this.tmpResult != "fail")
-                //{
-                //    this._formAccount.closeForm();
-                //    new messageSuccess().ShowDialog();
-                //}
-                //else
-                //{
-                //    this._formAccount.showError();
-                //}
+                await Task.Run<string>(() => this.tmpResult = ThisAddIn.LoginAction(objData));
+                if (this.tmpResult != "fail")
+                {
+                    this._formAccount.closeForm();
+                    //new messageSuccess().ShowDialog();
+                }
+                else
+                {
+                    this._formAccount.showError();
+                }
             }
             catch (Exception ex)
             {
@@ -469,49 +472,49 @@ namespace ARC_Outlook_Plugin
             }
         }
 
-        //public static string LoginAction(object objData)
-        //{
-        //    string thisAddIn;
-        //    dynamic obj = JObject.Parse(objData.ToString());
-        //    string str = (string)(obj.host.ToString() + "/api/mail/loginFromOutlook");
-        //    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
-        //    jsonObject.Add("email", obj.email.ToString());
-        //    jsonObject.Add("password", obj.password.ToString());
-        //    HttpClient httpClient = new HttpClient();
-        //    StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
-        //    Task<HttpResponseMessage> task = httpClient.PostAsync(str, stringContent);
-        //    HttpResponseMessage result = task.Result;
-        //    AggregateException exception = task.Exception;
-        //    TaskStatus status = task.Status;
-        //    if (!result.IsSuccessStatusCode)
-        //    {
-        //        thisAddIn = "fail";
-        //    }
-        //    else
-        //    {
-        //        Task<string> task1 = result.Content.ReadAsStringAsync();
-        //        if ((task1.Result == null || !(task1.Result != "") ? true : task1.Result == "\"\""))
-        //        {
-        //            thisAddIn = "fail";
-        //        }
-        //        else
-        //        {
-        //            dynamic obj1 = JObject.Parse(task1.Result);
-        //            Globals.ThisAddIn.resultLogin = obj1.data;
-        //            thisAddIn = (string)((dynamic)Globals.ThisAddIn.resultLogin).ToString();
-        //        }
-        //    }
-        //    if (thisAddIn == "fail")
-        //    {
-        //        Globals.ThisAddIn.ResetDefaultInfo(obj.host.ToString(), obj.email.ToString());
-        //    }
-        //    else
-        //    {
-        //        Globals.ThisAddIn.SaveYourInfo(obj.host.ToString(), obj.email.ToString(), ((dynamic)Globals.ThisAddIn.resultLogin).ToString());
-        //    }
-        //    Globals.ThisAddIn.EventCreateNewNoteAfterEmailSent();
-        //    return thisAddIn;
-        //}
+        public static string LoginAction(JObject objData)
+        {
+            string thisAddIn;
+            dynamic obj = JObject.Parse(objData.ToString());
+            string str = (string)(obj["host"].ToString() + "/api/mail/test");
+            JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+            jsonObject.Add("email", obj["email"].ToString());
+            jsonObject.Add("password", obj["password"].ToString());
+            HttpClient httpClient = new HttpClient();
+            StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+            Task<HttpResponseMessage> task = httpClient.GetAsync(str);
+            HttpResponseMessage result = task.Result;
+            AggregateException exception = task.Exception;
+            TaskStatus status = task.Status;
+            if (!result.IsSuccessStatusCode)
+            {
+                thisAddIn = "fail";
+            }
+            else
+            {
+                Task<string> task1 = result.Content.ReadAsStringAsync();
+                if ((task1.Result == null || !(task1.Result != "") ? true : task1.Result == "\"\""))
+                {
+                    thisAddIn = "fail";
+                }
+                else
+                {
+                    dynamic obj1 = JObject.Parse(task1.Result);
+                    Globals.ThisAddIn.resultLogin = obj1.data;
+                    thisAddIn = (string)((dynamic)Globals.ThisAddIn.resultLogin).ToString();
+                }
+            }
+            if (thisAddIn == "fail")
+            {
+                Globals.ThisAddIn.ResetDefaultInfo(obj["host"].ToString(), obj["email"].ToString());
+            }
+            else
+            {
+                Globals.ThisAddIn.SaveYourInfo(obj["host"].ToString(), obj["email"].ToString(), ((dynamic)Globals.ThisAddIn.resultLogin).ToString());
+            }
+            Globals.ThisAddIn.EventCreateNewNoteAfterEmailSent();
+            return thisAddIn;
+        }
 
         //public static object ParseDataFromEmail(MailItem mail, int indexMail)
         //{

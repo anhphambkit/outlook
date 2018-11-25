@@ -12,5 +12,10 @@ namespace ARC_Outlook_Plugin
         {
 
         }
+
+        private void btn_arc_Click(object sender, RibbonControlEventArgs e)
+        {
+            Globals.ThisAddIn.showAccountForm(false);
+        }
     }
 }
