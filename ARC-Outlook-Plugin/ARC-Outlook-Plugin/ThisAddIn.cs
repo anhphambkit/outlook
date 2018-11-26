@@ -32,7 +32,8 @@ using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using Exception = System.Exception;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Newtonsoft.Json.Linq;
-//using redemption;
+using System.Net;
+using Redemption;
 
 namespace ARC_Outlook_Plugin
 {
@@ -70,8 +71,8 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                this.EventCreateNewNoteAfterEmailSent();
-                this.ThreadCallCheckSync();
+                //this.EventCreateNewNoteAfterEmailSent();
+                //this.ThreadCallCheckSync();
                 this.StartupCheckLogin();
             }
             catch (Exception ex)
@@ -88,6 +89,7 @@ namespace ARC_Outlook_Plugin
                 {
                     this.showAccountForm(false);
                 }
+                ThisAddIn.CheckProcessEmail();
             }
             catch (Exception exception)
             {
@@ -95,77 +97,85 @@ namespace ARC_Outlook_Plugin
             }
         }
 
-        //public static void CheckProcessEmail()
-        //{
-        //    if ((Settings.Default.token == null ? false : Settings.Default.token != ""))
-        //    {
-        //        try
-        //        {
-        //            string @default = Settings.Default.host;
-        //            string str = Settings.Default.email;
-        //            string str1 = string.Concat(@default, "/api/mail/syncProcessEmail?email_user=", str);
-        //            HttpClient httpClient = new HttpClient();
-        //            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
-        //            HttpResponseMessage result = httpClient.GetAsync(str1).Result;
-        //            Task<string> task = result.Content.ReadAsStringAsync();
-        //            dynamic obj = JObject.Parse(task.Result).data;
-        //            if (obj != (dynamic)null)
-        //            {
-        //                foreach (dynamic obj1 in (IEnumerable)obj)
-        //                {
-        //                    dynamic obj2 = obj1.id;
-        //                    dynamic obj3 = obj1.attachments;
-        //                    Microsoft.Office.Interop.Outlook.Application application = Globals.ThisAddIn.Application;
-        //                    RDOSession mAPIOBJECT = (RDOSession)Activator.CreateInstance(Marshal.GetTypeFromCLSID(new Guid("29AB7A12-B531-450E-8F7A-EA94C2F3C05F")));
-        //                    Store selectedStore = Globals.ThisAddIn.GetSelectedStore(Settings.Default.email);
-        //                    mAPIOBJECT.MAPIOBJECT = selectedStore.Session.MAPIOBJECT;
-        //                    RDOFolder defaultFolder = mAPIOBJECT.GetDefaultFolder(rdoDefaultFolders.olFolderSentMail);
-        //                    RDOMail now = defaultFolder.Items.Add("IPM.Note");
-        //                    now.Sent = true;
-        //                    now.SentOn = DateTime.Now;
-        //                    now.ReceivedTime = DateTime.Now;
-        //                    now.Subject = (string)obj1.subject;
-        //                    now.HTMLBody = (string)obj1.body;
-        //                    now.To = (string)obj1.to_addr;
-        //                    now.BCC = (string)obj1.bcc;
-        //                    now.CC = (string)obj1.cc;
-        //                    now.Recipients.Add(obj1.to_addr);
-        //                    now.Recipients.ResolveAll(Type.Missing, Type.Missing);
-        //                    now.SenderName = (string)obj1.from_name;
-        //                    now.SenderEmailAddress = (string)obj1.from_addr;
-        //                    dynamic obj4 = string.Concat(System.Windows.Forms.Application.LocalUserAppDataPath, "\\contentEmailSync\\mail_") + obj2;
-        //                    if ((dynamic)(!Directory.Exists(obj4)))
-        //                    {
-        //                        Directory.CreateDirectory(obj4);
-        //                    }
-        //                    if (obj3 != (dynamic)null)
-        //                    {
-        //                        foreach (dynamic obj5 in (IEnumerable)obj3)
-        //                        {
-        //                            if (obj5 != (dynamic)null)
-        //                            {
-        //                                string str2 = ((string)obj5.path_string).Replace("http://localhost", @default);
-        //                                now.Attachments.Add(str2, Type.Missing, Type.Missing, Type.Missing);
-        //                            }
-        //                        }
-        //                    }
-        //                    now.Save();
-        //                    string str3 = string.Concat(@default, "/api/mail/updateStatusEmailSync");
-        //                    HttpClient authenticationHeaderValue = new HttpClient();
-        //                    authenticationHeaderValue.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
-        //                    JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
-        //                    jsonObject.Add("email_id", obj1.id.ToString());
-        //                    StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
-        //                    HttpResponseMessage httpResponseMessage = authenticationHeaderValue.PostAsync(str3, stringContent).Result;
-        //                }
-        //            }
-        //        }
-        //        catch (Exception exception)
-        //        {
-        //            MessageBox.Show(exception.Message);
-        //        }
-        //    }
-        //}
+        public static void CheckProcessEmail()
+        {
+            if ((Settings.Default.token == null ? false : Settings.Default.token != ""))
+            {
+                try
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+                    string hostDefault = Settings.Default.host;
+                    string emailDefault = Settings.Default.email;
+                    string urlSync = string.Concat(hostDefault, "/api/mail/syncProcessEmail?email_user=", emailDefault);
+                    HttpClient httpClient = new HttpClient();
+                    //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+                    HttpResponseMessage result = httpClient.GetAsync(urlSync).Result;
+                    Task<string> task = result.Content.ReadAsStringAsync();
+                    if ((task.Result == null || !(task.Result != "") ? true : task.Result == "\"\""))
+                    {
+                    }
+                    else
+                    {
+                        dynamic emailSyncs = JObject.Parse(task.Result)["data"];
+                        if (emailSyncs != (dynamic)null)
+                        {
+                            foreach (dynamic emailSync in (IEnumerable)emailSyncs)
+                            {
+                                dynamic idEmail = emailSync.id;
+                                dynamic attachmentEmails = emailSync.attachments;
+                                Outlook.Application application = Globals.ThisAddIn.Application;
+                                RDOSession mAPIOBJECT = new RDOSession();
+                                Store selectedStore = Globals.ThisAddIn.GetSelectedStore(Settings.Default.email);
+                                mAPIOBJECT.MAPIOBJECT = selectedStore.Session.MAPIOBJECT;
+                                RDOFolder defaultFolder = mAPIOBJECT.GetFolderFromPath(selectedStore.GetDefaultFolder(OlDefaultFolders.olFolderSentMail).FullFolderPath);
+                                RDOMail now = defaultFolder.Items.Add("IPM.Note");
+                                now.Sent = true;
+                                now.SentOn = DateTime.Now;
+                                now.ReceivedTime = DateTime.Now;
+                                now.Subject = emailSync.subject.ToString();
+                                now.HTMLBody = emailSync.body.ToString();
+                                now.To = emailSync.to_addr.ToString();
+                                now.BCC = emailSync.bcc.ToString();
+                                now.CC = emailSync.cc.ToString();
+                                now.Recipients.Add(emailSync.to_addr.ToString());
+                                now.Recipients.ResolveAll(now.BCC, now.CC);
+                                now.SenderName = emailSync.from_name.ToString();
+                                now.SenderEmailAddress = emailSync.from_addr.ToString();
+                                dynamic folderPath = string.Concat(System.Windows.Forms.Application.LocalUserAppDataPath, "\\contentEmailSync\\mail_") + idEmail;
+                                if ((dynamic)(!Directory.Exists(folderPath)))
+                                {
+                                    Directory.CreateDirectory(folderPath);
+                                }
+                                if (attachmentEmails != (dynamic)null)
+                                {
+                                    foreach (dynamic attachmentEmail in (IEnumerable)attachmentEmails)
+                                    {
+                                        if (attachmentEmail != (dynamic)null)
+                                        {
+                                            string urlAttachment = ((string)attachmentEmail.path_string).Replace("http://localhost", hostDefault);
+                                            now.Attachments.Add(urlAttachment);
+                                        }
+                                    }
+                                }
+                                now.Save();
+                                string urlUpdateStatusEmailSync = string.Concat(hostDefault, "/api/mail/updateStatusEmailSync");
+                                HttpClient authenticationHeaderValue = new HttpClient();
+                                authenticationHeaderValue.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+                                JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+                                jsonObject.Add("email_id", emailSync.id.ToString());
+                                StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+                                HttpResponseMessage httpResponseMessage = authenticationHeaderValue.PostAsync(urlUpdateStatusEmailSync, stringContent).Result;
+                            }
+                        }
+                    }
+                   
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+        }
 
         public void EventCreateNewNoteAfterEmailSent()
         {
@@ -173,14 +183,14 @@ namespace ARC_Outlook_Plugin
             {
                 this.RemoveEventAfterEmailSent();
                 Store store = this.GetSelectedStore(Settings.Default.email);
-                //Folder folder = store.GetDefaultFolder(OlDefaultFolders.olFolderSentMail) as Folder;
-                //this._items = folder.Items;
-                //bool flag = Settings.Default.token != null && Settings.Default.token != "";
-                //if (flag)
-                //{
-                //    //new ComAwareEventInfo(typeof(Microsoft.Office.Interop.Outlook.ItemsEvents_Event), "ItemAdd").AddEventHandler(this._items, new ItemsEvents_ItemAddEventHandler(this, (UIntPtr)ldftn(Items_ItemAdd)));
-                //    this._totalEventAdd++;
-                //}
+                Folder folder = store.GetDefaultFolder(OlDefaultFolders.olFolderSentMail) as Folder;
+                this._items = folder.Items;
+                bool flag = Settings.Default.token != null && Settings.Default.token != "";
+                if (flag)
+                {
+                    //new ComAwareEventInfo(typeof(Microsoft.Office.Interop.Outlook.ItemsEvents_Event), "ItemAdd").AddEventHandler(this._items, new ItemsEvents_ItemAddEventHandler(this, (UIntPtr)ldftn(Items_ItemAdd)));
+                    this._totalEventAdd++;
+                }
             }
             catch (Exception ex)
             {
@@ -258,9 +268,9 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                //Thread thread = new Thread(new ThreadStart(ThisAddIn.CheckProcessEmail));
-                //thread.Start();
-                //thread.Join();
+                Thread thread = new Thread(new ThreadStart(ThisAddIn.CheckProcessEmail));
+                thread.Start();
+                thread.Join();
             }
             catch (Exception ex)
             {
@@ -474,15 +484,16 @@ namespace ARC_Outlook_Plugin
 
         public static string LoginAction(JObject objData)
         {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             string thisAddIn;
             dynamic obj = JObject.Parse(objData.ToString());
-            string str = (string)(obj["host"].ToString() + "/api/mail/test");
+            string str = (string)(obj["host"].ToString() + "/api/mail/loginFromOutlook");
             JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
             jsonObject.Add("email", obj["email"].ToString());
             jsonObject.Add("password", obj["password"].ToString());
             HttpClient httpClient = new HttpClient();
             StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> task = httpClient.GetAsync(str);
+            Task<HttpResponseMessage> task = httpClient.PostAsync(str, stringContent);
             HttpResponseMessage result = task.Result;
             AggregateException exception = task.Exception;
             TaskStatus status = task.Status;
