@@ -17,7 +17,6 @@ G:\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\Microso
 G:\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
 G:\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
 G:\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csprojResolveAssemblyReference.cache
-C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.Primitives.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.dll.config
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.pdb
@@ -98,6 +97,7 @@ C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.Algorithms.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.Csp.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.Primitives.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Cryptography.X509Certificates.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.Principal.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Security.SecureString.dll
@@ -133,3 +133,4 @@ C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.CopyComplete
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
+C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csprojAssemblyReference.cache

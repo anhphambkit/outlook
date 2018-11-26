@@ -71,8 +71,8 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                //this.EventCreateNewNoteAfterEmailSent();
-                //this.ThreadCallCheckSync();
+                this.EventCreateNewNoteAfterEmailSent();
+                this.ThreadCallCheckSync();
                 this.StartupCheckLogin();
             }
             catch (Exception ex)
@@ -89,7 +89,6 @@ namespace ARC_Outlook_Plugin
                 {
                     this.showAccountForm(false);
                 }
-                ThisAddIn.CheckProcessEmail();
             }
             catch (Exception exception)
             {
@@ -108,22 +107,23 @@ namespace ARC_Outlook_Plugin
                     string emailDefault = Settings.Default.email;
                     string urlSync = string.Concat(hostDefault, "/api/mail/syncProcessEmail?email_user=", emailDefault);
                     HttpClient httpClient = new HttpClient();
-                    //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
                     HttpResponseMessage result = httpClient.GetAsync(urlSync).Result;
                     Task<string> task = result.Content.ReadAsStringAsync();
                     if ((task.Result == null || !(task.Result != "") ? true : task.Result == "\"\""))
                     {
+                        MessageBox.Show("Process Email Fail: Result Null From Server");
                     }
                     else
                     {
                         dynamic emailSyncs = JObject.Parse(task.Result)["data"];
                         if (emailSyncs != (dynamic)null)
                         {
+                            Outlook.Application application = Globals.ThisAddIn.Application;
                             foreach (dynamic emailSync in (IEnumerable)emailSyncs)
                             {
                                 dynamic idEmail = emailSync.id;
                                 dynamic attachmentEmails = emailSync.attachments;
-                                Outlook.Application application = Globals.ThisAddIn.Application;
                                 RDOSession mAPIOBJECT = new RDOSession();
                                 Store selectedStore = Globals.ThisAddIn.GetSelectedStore(Settings.Default.email);
                                 mAPIOBJECT.MAPIOBJECT = selectedStore.Session.MAPIOBJECT;
@@ -137,8 +137,8 @@ namespace ARC_Outlook_Plugin
                                 now.To = emailSync.to_addr.ToString();
                                 now.BCC = emailSync.bcc.ToString();
                                 now.CC = emailSync.cc.ToString();
-                                now.Recipients.Add(emailSync.to_addr.ToString());
-                                now.Recipients.ResolveAll(now.BCC, now.CC);
+                                //now.Recipients.Add(emailSync.to_addr.ToString());
+                                //now.Recipients.ResolveAll();
                                 now.SenderName = emailSync.from_name.ToString();
                                 now.SenderEmailAddress = emailSync.from_addr.ToString();
                                 dynamic folderPath = string.Concat(System.Windows.Forms.Application.LocalUserAppDataPath, "\\contentEmailSync\\mail_") + idEmail;
@@ -172,7 +172,7 @@ namespace ARC_Outlook_Plugin
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show("Process Email Fail: " + exception.Message);
                 }
             }
         }
@@ -373,6 +373,356 @@ namespace ARC_Outlook_Plugin
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //public static void UploadNewNoteToServer(object objectMail)
+        //{
+        //    try
+        //    {
+        //        string host = Settings.Default.host;
+        //        MailItem mailItem = objectMail as MailItem;
+        //        object obj = ThisAddIn.ParseDataFromEmail(mailItem, 0);
+        //        object arg = JObject.Parse(obj.ToString());
+        //        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        //        if (ThisAddIn.<> o__29.<> p__2 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__2 = CallSite<Func<CallSite, object, bool>>.Create(Binder.UnaryOperation(CSharpBinderFlags.None, ExpressionType.IsTrue, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, bool> target = ThisAddIn.<> o__29.<> p__2.Target;
+        //        CallSite<> p__ = ThisAddIn.<> o__29.<> p__2;
+        //        if (ThisAddIn.<> o__29.<> p__1 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__1 = CallSite<Func<CallSite, object, object, object>>.Create(Binder.BinaryOperation(CSharpBinderFlags.None, ExpressionType.NotEqual, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, object, object> target2 = ThisAddIn.<> o__29.<> p__1.Target;
+        //        CallSite<> p__2 = ThisAddIn.<> o__29.<> p__1;
+        //        if (ThisAddIn.<> o__29.<> p__0 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__0 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "fileName", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        bool flag = target(<> p__, target2(<> p__2, ThisAddIn.<> o__29.<> p__0.Target(ThisAddIn.<> o__29.<> p__0, arg), null));
+        //        if (flag)
+        //        {
+        //            if (ThisAddIn.<> o__29.<> p__6 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__6 = CallSite<Func<CallSite, object, string>>.Create(Binder.Convert(CSharpBinderFlags.None, typeof(string), typeof(ThisAddIn)));
+        //            }
+        //            Func<CallSite, object, string> target3 = ThisAddIn.<> o__29.<> p__6.Target;
+        //            CallSite<> p__3 = ThisAddIn.<> o__29.<> p__6;
+        //            if (ThisAddIn.<> o__29.<> p__5 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__5 = CallSite<Func<CallSite, string, object, object>>.Create(Binder.BinaryOperation(CSharpBinderFlags.None, ExpressionType.Add, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, string, object, object> target4 = ThisAddIn.<> o__29.<> p__5.Target;
+        //            CallSite<> p__4 = ThisAddIn.<> o__29.<> p__5;
+        //            string arg2 = host + "/api/mail/uploadAttachmentFromClient?entry_id=";
+        //            if (ThisAddIn.<> o__29.<> p__4 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__4 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, object, object> target5 = ThisAddIn.<> o__29.<> p__4.Target;
+        //            CallSite<> p__5 = ThisAddIn.<> o__29.<> p__4;
+        //            if (ThisAddIn.<> o__29.<> p__3 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__3 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "entry_id", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            string text = target3(<> p__3, target4(<> p__4, arg2, target5(<> p__5, ThisAddIn.<> o__29.<> p__3.Target(ThisAddIn.<> o__29.<> p__3, arg))));
+        //            if (ThisAddIn.<> o__29.<> p__9 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__9 = CallSite<Action<CallSite, Dictionary<string, string>, string, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Action<CallSite, Dictionary<string, string>, string, object> target6 = ThisAddIn.<> o__29.<> p__9.Target;
+        //            CallSite<> p__6 = ThisAddIn.<> o__29.<> p__9;
+        //            Dictionary<string, string> arg3 = dictionary;
+        //            string arg4 = "attachment";
+        //            if (ThisAddIn.<> o__29.<> p__8 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__8 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, object, object> target7 = ThisAddIn.<> o__29.<> p__8.Target;
+        //            CallSite<> p__7 = ThisAddIn.<> o__29.<> p__8;
+        //            if (ThisAddIn.<> o__29.<> p__7 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__7 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "pathAttachment", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            target6(<> p__6, arg3, arg4, target7(<> p__7, ThisAddIn.<> o__29.<> p__7.Target(ThisAddIn.<> o__29.<> p__7, arg)));
+        //            if (ThisAddIn.<> o__29.<> p__12 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__12 = CallSite<Func<CallSite, object, string>>.Create(Binder.Convert(CSharpBinderFlags.None, typeof(string), typeof(ThisAddIn)));
+        //            }
+        //            Func<CallSite, object, string> target8 = ThisAddIn.<> o__29.<> p__12.Target;
+        //            CallSite<> p__8 = ThisAddIn.<> o__29.<> p__12;
+        //            if (ThisAddIn.<> o__29.<> p__11 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__11 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, object, object> target9 = ThisAddIn.<> o__29.<> p__11.Target;
+        //            CallSite<> p__9 = ThisAddIn.<> o__29.<> p__11;
+        //            if (ThisAddIn.<> o__29.<> p__10 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__10 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "fileName", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            string fileName = target8(<> p__8, target9(<> p__9, ThisAddIn.<> o__29.<> p__10.Target(ThisAddIn.<> o__29.<> p__10, arg)));
+        //            HttpClient httpClient = new HttpClient();
+        //            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
+        //            httpClient.BaseAddress = new Uri(text);
+        //            httpClient.DefaultRequestHeaders.Accept.Clear();
+        //            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        //            MultipartFormDataContent multipartFormDataContent = new MultipartFormDataContent();
+        //            HttpContent content = new StringContent("fileToUpload");
+        //            HttpContent content2 = new FormUrlEncodedContent(dictionary);
+        //            multipartFormDataContent.Add(content, "fileToUpload");
+        //            multipartFormDataContent.Add(content2, "medicineOrder");
+        //            if (ThisAddIn.<> o__29.<> p__15 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__15 = CallSite<Func<CallSite, Type, object, FileMode, FileStream>>.Create(Binder.InvokeConstructor(CSharpBinderFlags.None, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.IsStaticType, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null)
+        //                }));
+        //            }
+        //            Func<CallSite, Type, object, FileMode, FileStream> target10 = ThisAddIn.<> o__29.<> p__15.Target;
+        //            CallSite<> p__10 = ThisAddIn.<> o__29.<> p__15;
+        //            Type typeFromHandle = typeof(FileStream);
+        //            if (ThisAddIn.<> o__29.<> p__14 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__14 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, object, object> target11 = ThisAddIn.<> o__29.<> p__14.Target;
+        //            CallSite<> p__11 = ThisAddIn.<> o__29.<> p__14;
+        //            if (ThisAddIn.<> o__29.<> p__13 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__13 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "pathAttachment", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            FileStream content3 = target10(<> p__10, typeFromHandle, target11(<> p__11, ThisAddIn.<> o__29.<> p__13.Target(ThisAddIn.<> o__29.<> p__13, arg)), FileMode.Open);
+        //            multipartFormDataContent.Add(new StreamContent(content3)
+        //            {
+        //                Headers =
+        //                {
+        //                    ContentDisposition = new ContentDispositionHeaderValue("form-data")
+        //                    {
+        //                        Name = "file",
+        //                        FileName = fileName
+        //                    }
+        //                }
+        //            });
+        //            HttpResponseMessage httpResponseMessage = null;
+        //            try
+        //            {
+        //                httpResponseMessage = httpClient.PostAsync(text, multipartFormDataContent).Result;
+        //            }
+        //            catch (Exception ex)
+        //            {
+        //                MessageBox.Show(ex.Message);
+        //            }
+        //            string result = httpResponseMessage.Content.ReadAsStringAsync().Result;
+        //        }
+        //        JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+        //        object obj2 = new JsonArray(new JsonValue[0]);
+        //        Recipients recipients = mailItem.Recipients;
+        //        foreach (object obj3 in recipients)
+        //        {
+        //            Recipient recipient = (Recipient)obj3;
+        //            if (ThisAddIn.<> o__29.<> p__16 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__16 = CallSite<Action<CallSite, object, string>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+        //                }));
+        //            }
+        //            ThisAddIn.<> o__29.<> p__16.Target(ThisAddIn.<> o__29.<> p__16, obj2, recipient.Address);
+        //        }
+        //        if (ThisAddIn.<> o__29.<> p__17 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__17 = CallSite<Action<CallSite, JsonObject, string, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        ThisAddIn.<> o__29.<> p__17.Target(ThisAddIn.<> o__29.<> p__17, jsonObject, "addresses", obj2);
+        //        jsonObject.Add("subject", mailItem.Subject);
+        //        jsonObject.Add("fromEmail", mailItem.SenderEmailAddress);
+        //        if (ThisAddIn.<> o__29.<> p__20 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__20 = CallSite<Action<CallSite, JsonObject, string, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Action<CallSite, JsonObject, string, object> target12 = ThisAddIn.<> o__29.<> p__20.Target;
+        //        CallSite<> p__12 = ThisAddIn.<> o__29.<> p__20;
+        //        JsonObject arg5 = jsonObject;
+        //        string arg6 = "contentMail";
+        //        if (ThisAddIn.<> o__29.<> p__19 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__19 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, object> target13 = ThisAddIn.<> o__29.<> p__19.Target;
+        //        CallSite<> p__13 = ThisAddIn.<> o__29.<> p__19;
+        //        if (ThisAddIn.<> o__29.<> p__18 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__18 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "body", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        target12(<> p__12, arg5, arg6, target13(<> p__13, ThisAddIn.<> o__29.<> p__18.Target(ThisAddIn.<> o__29.<> p__18, arg)));
+        //        if (ThisAddIn.<> o__29.<> p__23 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__23 = CallSite<Action<CallSite, JsonObject, string, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Action<CallSite, JsonObject, string, object> target14 = ThisAddIn.<> o__29.<> p__23.Target;
+        //        CallSite<> p__14 = ThisAddIn.<> o__29.<> p__23;
+        //        JsonObject arg7 = jsonObject;
+        //        string arg8 = "entry_id";
+        //        if (ThisAddIn.<> o__29.<> p__22 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__22 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, object> target15 = ThisAddIn.<> o__29.<> p__22.Target;
+        //        CallSite<> p__15 = ThisAddIn.<> o__29.<> p__22;
+        //        if (ThisAddIn.<> o__29.<> p__21 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__21 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "entry_id", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        target14(<> p__14, arg7, arg8, target15(<> p__15, ThisAddIn.<> o__29.<> p__21.Target(ThisAddIn.<> o__29.<> p__21, arg)));
+        //        if (ThisAddIn.<> o__29.<> p__26 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__26 = CallSite<Func<CallSite, object, bool>>.Create(Binder.UnaryOperation(CSharpBinderFlags.None, ExpressionType.IsTrue, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, bool> target16 = ThisAddIn.<> o__29.<> p__26.Target;
+        //        CallSite<> p__16 = ThisAddIn.<> o__29.<> p__26;
+        //        if (ThisAddIn.<> o__29.<> p__25 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__25 = CallSite<Func<CallSite, object, object, object>>.Create(Binder.BinaryOperation(CSharpBinderFlags.None, ExpressionType.NotEqual, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+        //            }));
+        //        }
+        //        Func<CallSite, object, object, object> target17 = ThisAddIn.<> o__29.<> p__25.Target;
+        //        CallSite<> p__17 = ThisAddIn.<> o__29.<> p__25;
+        //        if (ThisAddIn.<> o__29.<> p__24 == null)
+        //        {
+        //            ThisAddIn.<> o__29.<> p__24 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "fileName", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //            {
+        //                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //            }));
+        //        }
+        //        bool flag2 = target16(<> p__16, target17(<> p__17, ThisAddIn.<> o__29.<> p__24.Target(ThisAddIn.<> o__29.<> p__24, arg), null));
+        //        if (flag2)
+        //        {
+        //            if (ThisAddIn.<> o__29.<> p__29 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__29 = CallSite<Action<CallSite, JsonObject, string, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.ResultDiscarded, "Add", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType | CSharpArgumentInfoFlags.Constant, null),
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Action<CallSite, JsonObject, string, object> target18 = ThisAddIn.<> o__29.<> p__29.Target;
+        //            CallSite<> p__18 = ThisAddIn.<> o__29.<> p__29;
+        //            JsonObject arg9 = jsonObject;
+        //            string arg10 = "attachment";
+        //            if (ThisAddIn.<> o__29.<> p__28 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__28 = CallSite<Func<CallSite, object, object>>.Create(Binder.InvokeMember(CSharpBinderFlags.None, "ToString", null, typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            Func<CallSite, object, object> target19 = ThisAddIn.<> o__29.<> p__28.Target;
+        //            CallSite<> p__19 = ThisAddIn.<> o__29.<> p__28;
+        //            if (ThisAddIn.<> o__29.<> p__27 == null)
+        //            {
+        //                ThisAddIn.<> o__29.<> p__27 = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "fileName", typeof(ThisAddIn), new CSharpArgumentInfo[]
+        //                {
+        //                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+        //                }));
+        //            }
+        //            target18(<> p__18, arg9, arg10, target19(<> p__19, ThisAddIn.<> o__29.<> p__27.Target(ThisAddIn.<> o__29.<> p__27, arg)));
+        //        }
+        //        else
+        //        {
+        //            jsonObject.Add("attachment", null);
+        //        }
+        //        string requestUri = host + "/api/mail/saveNoteFromEmailDataClient";
+        //        HttpClient httpClient2 = new HttpClient();
+        //        httpClient2.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
+        //        StringContent content4 = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+        //        HttpResponseMessage result2 = httpClient2.PostAsync(requestUri, content4).Result;
+        //    }
+        //    catch (Exception ex2)
+        //    {
+        //        MessageBox.Show(ex2.Message);
+        //    }
+        //}
 
         public async void SendRequestLogin(JObject objData)
         {
