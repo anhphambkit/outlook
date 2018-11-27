@@ -38,19 +38,29 @@
             this.arc_tab = this.Factory.CreateRibbonTab();
             this.arc_btn_group = this.Factory.CreateRibbonGroup();
             this.btn_arc = this.Factory.CreateRibbonButton();
+            this.syncBtn = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
+            this.settingGroupBtn = this.Factory.CreateRibbonButtonGroup();
+            this.cleanDataBtn = this.Factory.CreateRibbonButton();
+            this.inforBtn = this.Factory.CreateRibbonButton();
+            this.arcWebBtn = this.Factory.CreateRibbonButton();
             this.arc_tab.SuspendLayout();
             this.arc_btn_group.SuspendLayout();
+            this.group1.SuspendLayout();
+            this.settingGroupBtn.SuspendLayout();
             this.SuspendLayout();
             // 
             // arc_tab
             // 
             this.arc_tab.Groups.Add(this.arc_btn_group);
+            this.arc_tab.Groups.Add(this.group1);
             resources.ApplyResources(this.arc_tab, "arc_tab");
             this.arc_tab.Name = "arc_tab";
             // 
             // arc_btn_group
             // 
             this.arc_btn_group.Items.Add(this.btn_arc);
+            this.arc_btn_group.Items.Add(this.syncBtn);
             resources.ApplyResources(this.arc_btn_group, "arc_btn_group");
             this.arc_btn_group.Name = "arc_btn_group";
             // 
@@ -62,6 +72,49 @@
             this.btn_arc.ShowImage = true;
             this.btn_arc.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_arc_Click);
             // 
+            // syncBtn
+            // 
+            this.syncBtn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            resources.ApplyResources(this.syncBtn, "syncBtn");
+            this.syncBtn.Name = "syncBtn";
+            this.syncBtn.ShowImage = true;
+            this.syncBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.syncBtn_Click);
+            // 
+            // group1
+            // 
+            this.group1.Items.Add(this.settingGroupBtn);
+            this.group1.Items.Add(this.inforBtn);
+            this.group1.Items.Add(this.arcWebBtn);
+            resources.ApplyResources(this.group1, "group1");
+            this.group1.Name = "group1";
+            // 
+            // settingGroupBtn
+            // 
+            this.settingGroupBtn.Items.Add(this.cleanDataBtn);
+            this.settingGroupBtn.Name = "settingGroupBtn";
+            // 
+            // cleanDataBtn
+            // 
+            resources.ApplyResources(this.cleanDataBtn, "cleanDataBtn");
+            this.cleanDataBtn.Name = "cleanDataBtn";
+            this.cleanDataBtn.ShowImage = true;
+            this.cleanDataBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.cleanDataBtn_Click);
+            // 
+            // inforBtn
+            // 
+            resources.ApplyResources(this.inforBtn, "inforBtn");
+            this.inforBtn.Name = "inforBtn";
+            this.inforBtn.ShowImage = true;
+            this.inforBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.inforBtn_Click);
+            // 
+            // arcWebBtn
+            // 
+            this.arcWebBtn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            resources.ApplyResources(this.arcWebBtn, "arcWebBtn");
+            this.arcWebBtn.Name = "arcWebBtn";
+            this.arcWebBtn.ShowImage = true;
+            this.arcWebBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.arcWebBtn_Click);
+            // 
             // arc_addin
             // 
             this.Name = "arc_addin";
@@ -72,6 +125,10 @@
             this.arc_tab.PerformLayout();
             this.arc_btn_group.ResumeLayout(false);
             this.arc_btn_group.PerformLayout();
+            this.group1.ResumeLayout(false);
+            this.group1.PerformLayout();
+            this.settingGroupBtn.ResumeLayout(false);
+            this.settingGroupBtn.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -80,6 +137,12 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup arc_btn_group;
         private Microsoft.Office.Tools.Ribbon.RibbonTab arc_tab;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_arc;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton syncBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButtonGroup settingGroupBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton cleanDataBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton inforBtn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton arcWebBtn;
     }
 
     partial class ThisRibbonCollection

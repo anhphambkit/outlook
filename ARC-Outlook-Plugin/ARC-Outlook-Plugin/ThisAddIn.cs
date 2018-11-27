@@ -221,6 +221,11 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        public void StartSyncEmailNow()
+        {
+            ThisAddIn.CheckProcessEmail();
+        }
+
         // Remove event after email sent (prevent duplicate event)
         public void RemoveEventAfterEmailSent()
         {
