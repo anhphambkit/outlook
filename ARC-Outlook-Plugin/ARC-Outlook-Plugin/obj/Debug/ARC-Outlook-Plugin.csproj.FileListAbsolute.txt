@@ -134,3 +134,4 @@ C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.CopyComplete
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
+C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csprojAssemblyReference.cache
