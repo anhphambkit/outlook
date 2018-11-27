@@ -42,7 +42,7 @@ namespace ARC_Outlook_Plugin
                 }
                 this.hostInput.Text = Settings.Default.host;
                 this.errorMessage.Hide();
-                //this.loadingImage.Hide();
+                this.loadingImage.Hide();
                 this.logoutPanel.Hide();
                 this.hostData.Text = Settings.Default.host;
                 this.emailData.Text = Settings.Default.email;
@@ -52,16 +52,20 @@ namespace ARC_Outlook_Plugin
                 MessageBox.Show(ex2.Message);
             }
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //string text = this.emailListSelect.Text;
-            //string text2 = this.passwordInput.Text;
-        }
         
         private void cancelLoginForm_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                base.Invoke(new MethodInvoker(delegate ()
+                {
+                    base.Close();
+                }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cancel login fail: " + ex.Message);
+            }
         }
 
         public void closeForm()
@@ -75,7 +79,7 @@ namespace ARC_Outlook_Plugin
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Close form error: " + ex.Message);
             }
         }
         
@@ -91,7 +95,7 @@ namespace ARC_Outlook_Plugin
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Show login fail: " + ex.Message);
             }
         }
         
@@ -104,22 +108,22 @@ namespace ARC_Outlook_Plugin
                 {
                     base.Invoke(new MethodInvoker(delegate ()
                     {
-                        //this.loadingImage.Hide();
-                        //this.actionLoginPanel.Show();
-                        //this.errorMessage.Show();
+                        this.loadingImage.Hide();
+                        this.actionLoginPanel.Show();
+                        this.errorMessage.Show();
                     }));
                 }
                 else
                 {
-                    //this.loadingImage.Hide();
-                    //this.actionLoginPanel.Show();
-                    //this.errorMessage.Show();
-                    //base.Show();
+                    this.loadingImage.Hide();
+                    this.actionLoginPanel.Show();
+                    this.errorMessage.Show();
+                    base.Show();
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Show error fail: " + ex.Message);
             }
         }
         
@@ -130,30 +134,46 @@ namespace ARC_Outlook_Plugin
                 bool flag = System.Windows.Forms.Application.OpenForms["accountForm"] is accountForm;
                 if (!flag)
                 {
-                    //this.formLoginPanel.Hide();
-                    //this.logoutPanel.Show();
+                    this.formLoginPanel.Hide();
+                    this.logoutPanel.Show();
                     base.Show();
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Show Logout Form Error: " + ex.Message);
             }
         }
         
         private void cancelLogoutBtn_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                base.Invoke(new MethodInvoker(delegate ()
+                {
+                    base.Close();
+                }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Close form logout error: " + ex.Message);
+            }
         }
         
         private void logoutBtn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void infoPlugin_Click(object sender, EventArgs e)
-        {
-
+            try
+            {
+                base.Invoke(new MethodInvoker(delegate ()
+                {
+                    base.Close();
+                    Globals.ThisAddIn.TriggerLogoutBtn(this.hostData.Text, this.emailData.Text);
+                }));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Logout Error: " + ex.Message);
+            }
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
@@ -168,8 +188,8 @@ namespace ARC_Outlook_Plugin
                     jsonObject.host = this.hostInput.Text;
                     jsonObject.email = this.emailListSelect.Text;
                     jsonObject.password = this.passwordInput.Text;
-                    //this.actionLoginPanel.Hide();
-                    //this.loadingImage.Show();
+                    this.actionLoginPanel.Hide();
+                    this.loadingImage.Show();
                     Globals.ThisAddIn.SendRequestLogin(jsonObject);
                 }
                 else
@@ -180,7 +200,7 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Login error: " + ex.Message);
             }
         }
     }

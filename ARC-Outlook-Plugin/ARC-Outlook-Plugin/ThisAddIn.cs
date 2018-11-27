@@ -47,8 +47,8 @@ namespace ARC_Outlook_Plugin
         private int _totalEventAdd = 0;
 
         private Store selectedStore;
-        
-        //private messageSuccess _messageSuccess;
+
+        private messageSuccess _messageSuccess;
 
         private dynamic resultLogin;
 
@@ -60,8 +60,6 @@ namespace ARC_Outlook_Plugin
         {
             try
             {
-                this.EventCreateNewNoteAfterEmailSent();
-                this.ThreadCallCheckSync();
                 this.StartupCheckLogin();
             }
             catch (Exception ex)
@@ -70,6 +68,7 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        // Function check user logged or not:
         public void StartupCheckLogin()
         {
             try
@@ -78,6 +77,10 @@ namespace ARC_Outlook_Plugin
                 {
                     this.showAccountForm(false);
                 }
+                else
+                {
+                    this.StartAutoThreads();
+                }
             }
             catch (Exception exception)
             {
@@ -85,6 +88,14 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        // Auto start threads:
+        public void StartAutoThreads()
+        {
+            this.EventCreateNewNoteAfterEmailSent();
+            this.ThreadCallCheckSync();
+        }
+
+        // Function synce note from server to email in Sent Mail Folder of outlook client:
         public static void CheckProcessEmail()
         {
             if ((Settings.Default.token == null ? false : Settings.Default.token != ""))
@@ -95,17 +106,17 @@ namespace ARC_Outlook_Plugin
                     string hostDefault = Settings.Default.host;
                     string emailDefault = Settings.Default.email;
                     string urlSync = string.Concat(hostDefault, "/api/mail/syncProcessEmail?email_user=", emailDefault);
-                    HttpClient httpClient = new HttpClient();
-                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
-                    HttpResponseMessage result = httpClient.GetAsync(urlSync).Result;
-                    Task<string> task = result.Content.ReadAsStringAsync();
-                    if ((task.Result == null || !(task.Result != "") ? true : task.Result == "\"\""))
+                    HttpClient httpSyncEmailClient = new HttpClient();
+                    httpSyncEmailClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
+                    HttpResponseMessage httpResponseSyncEmail = httpSyncEmailClient.GetAsync(urlSync).Result;
+                    Task<string> resultSyncEmail = httpResponseSyncEmail.Content.ReadAsStringAsync();
+                    if ((resultSyncEmail.Result == null || !(resultSyncEmail.Result != "") ? true : resultSyncEmail.Result == "\"\""))
                     {
                         MessageBox.Show("Process Email Fail: Result Null From Server");
                     }
                     else
                     {
-                        dynamic emailSyncs = JObject.Parse(task.Result)["data"];
+                        dynamic emailSyncs = JObject.Parse(resultSyncEmail.Result)["data"];
                         if (emailSyncs != (dynamic)null)
                         {
                             Outlook.Application application = Globals.ThisAddIn.Application;
@@ -150,9 +161,9 @@ namespace ARC_Outlook_Plugin
                                 string urlUpdateStatusEmailSync = string.Concat(hostDefault, "/api/mail/updateStatusEmailSync");
                                 HttpClient authenticationHeaderValue = new HttpClient();
                                 authenticationHeaderValue.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", string.Concat("= ", Settings.Default.token, "&&&Email=", Settings.Default.email));
-                                JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
-                                jsonObject.Add("email_id", emailSync.id.ToString());
-                                StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
+                                JsonObject dataUpdateStatusEmail = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+                                dataUpdateStatusEmail.Add("email_id", emailSync.id.ToString());
+                                StringContent stringContent = new StringContent(dataUpdateStatusEmail.ToString(), Encoding.UTF8, "application/json");
                                 HttpResponseMessage httpResponseMessage = authenticationHeaderValue.PostAsync(urlUpdateStatusEmailSync, stringContent).Result;
                             }
                         }
@@ -166,11 +177,12 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        // Function listen event create new note after email sent:
         public void EventCreateNewNoteAfterEmailSent()
         {
             try
             {
-                //this.RemoveEventAfterEmailSent();
+                this.RemoveEventAfterEmailSent();
                 Store store = this.GetSelectedStore(Settings.Default.email);
                 Folder folder = store.GetDefaultFolder(OlDefaultFolders.olFolderSentMail) as Folder;
                 _items = folder.Items;
@@ -183,10 +195,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Cannot create event create new note after email sent: " + ex.Message);
             }
         }
 
+        // Show form login if user not login | or show logout form if user logged
         public void showAccountForm(bool error)
         {
             try
@@ -204,32 +217,34 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error show form account: " + ex.Message);
             }
         }
 
+        // Remove event after email sent (prevent duplicate event)
         public void RemoveEventAfterEmailSent()
         {
             for (int i = 0; i < this._totalEventAdd; i++)
             {
                 try
                 {
-                    //new ComAwareEventInfo(typeof(Microsoft.Office.Interop.Outlook.ItemsEvents_Event), "ItemAdd").RemoveEventHandler(this._items, new ItemsEvents_ItemAddEventHandler(this, (UIntPtr)ldftn(Items_ItemAdd)));
+                    _items.ItemAdd -= new ItemsEvents_ItemAddEventHandler(Items_ItemAdd);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error remove event after email sent: " + ex.Message);
                 }
             }
             this._totalEventAdd = 0;
         }
 
+        // Function show success message when loggin successfully
         public void ShowSuccessMessage(string message)
         {
             try
             {
-                //this._messageSuccess = new messageSuccess();
-                //this._messageSuccess.showMessage(message);
+                this._messageSuccess = new messageSuccess();
+                this._messageSuccess.showMessage(message);
             }
             catch (Exception ex)
             {
@@ -237,22 +252,24 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        // Thread (background task check sync process mail from note (server) to email sent (client)
         public void ThreadCallCheckSync()
         {
             try
             {
                 ThisAddIn.timerSync = new System.Timers.Timer();
-                ThisAddIn.timerSync.Interval = 180000.0;
+                ThisAddIn.timerSync.Interval = 180000.0; // Default 3 minutes
                 ThisAddIn.timerSync.Elapsed += ThisAddIn.ThreadAutoSyncProcessMail;
                 ThisAddIn.timerSync.AutoReset = true;
                 ThisAddIn.timerSync.Enabled = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error create thread check sync process email: " + ex.Message);
             }
         }
 
+        // Thread auto sync process email:
         private static void ThreadAutoSyncProcessMail(object source, ElapsedEventArgs e)
         {
             try
@@ -263,10 +280,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error start thread auto sync process email: " + ex.Message);
             }
         }
 
+        // Get selected store (folder email) from email:
         public Store GetSelectedStore(string account)
         {
             try
@@ -281,19 +299,20 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Error get selected store: " + exception.Message);
             }
             return this.selectedStore;
         }
 
+        // Function action event when email sent:
         private void Items_ItemAdd(object item)
         {
             try
             {
                 MailItem mailItem = item as MailItem;
-                string[] array = new string[0];
-                array = ThisAddIn.GetAllReciptents(mailItem);
-                bool flag = (!mailItem.Subject.StartsWith("FW: ") || !mailItem.Subject.StartsWith("RE: ")) && array.Length != 0;
+                string[] reciptents = new string[0];
+                reciptents = ThisAddIn.GetAllReciptents(mailItem);
+                bool flag = (!mailItem.Subject.StartsWith("FW: ") || !mailItem.Subject.StartsWith("RE: ")) && reciptents.Length != 0;
                 if (flag)
                 {
                     try
@@ -304,16 +323,17 @@ namespace ARC_Outlook_Plugin
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MessageBox.Show("Error thread prepair data cannot start: " + ex.Message);
                     }
                 }
             }
-            catch (Exception ex2)
+            catch (Exception exception)
             {
-                MessageBox.Show(ex2.Message);
+                MessageBox.Show("Error action event when email sent: " + exception.Message);
             }
         }
 
+        // Function delete all temp data on local:
         public void DeleteAllTemp()
         {
             try
@@ -332,7 +352,7 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Error delete temp data: " + exception.Message);
             }
         }
 
@@ -350,6 +370,7 @@ namespace ARC_Outlook_Plugin
             }
         }
 
+        // Prepair data to send request
         public static void PrepairDataToRequest(object item)
         {
             try
@@ -359,10 +380,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error prepair data: " + ex.Message);
             }
         }
 
+        // Function create new note to server:
         public static void UploadNewNoteToServer(object objectMail)
         {
             try
@@ -372,7 +394,7 @@ namespace ARC_Outlook_Plugin
                 MailItem mailItem = objectMail as MailItem;
                 object dataEmail = ThisAddIn.ParseDataFromEmail(mailItem);
                 dynamic data = JObject.Parse(dataEmail.ToString());
-                if (data.fileName != null)
+                if (data.fileName != null) // Check if has attachment, upload it to server
                 {
                     HttpClient uploadAttachmentClient = new HttpClient();
                     uploadAttachmentClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
@@ -411,6 +433,8 @@ namespace ARC_Outlook_Plugin
                     
                     string resultUpload = httpResponseUploadMessage.Content.ReadAsStringAsync().Result;
                 }
+
+                // Create new note:
                 string newNoteApi = host + "/api/mail/saveNoteFromEmailDataClient";
                 HttpClient createNewNoteHttpClient = new HttpClient();
                 createNewNoteHttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
@@ -426,12 +450,13 @@ namespace ARC_Outlook_Plugin
                 }
                 string resultCreateNewNote = httpResponseCreateNewMessage.Content.ReadAsStringAsync().Result;
             }
-            catch (Exception ex2)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex2.Message);
+                MessageBox.Show("Error create new note: " + ex.Message);
             }
         }
 
+        // Check dynamic/object has key/property
         public static bool IsPropertyExist(dynamic settings, string name)
         {
             if (settings is ExpandoObject)
@@ -440,6 +465,7 @@ namespace ARC_Outlook_Plugin
             return settings.GetType().GetProperty(name) != null;
         }
 
+        // Request to login server:
         public async void SendRequestLogin(JObject objData)
         {
             try
@@ -448,7 +474,7 @@ namespace ARC_Outlook_Plugin
                 if (this.tmpResult != "fail")
                 {
                     this._formAccount.closeForm();
-                    //new messageSuccess().ShowDialog();
+                    new messageSuccess().ShowDialog();
                 }
                 else
                 {
@@ -457,10 +483,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error send request login: " + ex.Message);
             }
         }
 
+        // Reset default info
         public void ResetDefaultInfo(string host, string email)
         {
             try
@@ -472,10 +499,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Reset default infor: " + ex.Message);
             }
         }
 
+        // Get all reciptents|emails from mail item:
         public static string[] GetAllReciptents(MailItem mail)
         {
             List<string> list = new List<string>();
@@ -488,7 +516,7 @@ namespace ARC_Outlook_Plugin
                     bool flag = recipient.Address != null && recipient.Address != "";
                     if (flag)
                     {
-                        if (recipient.AddressEntry.Type == "EX")
+                        if (recipient.AddressEntry.Type == "EX")  // Check reciptent is exchange account???
                             list.Add(recipient.AddressEntry.GetExchangeUser().PrimarySmtpAddress);
                         else
                             list.Add(recipient.Address);
@@ -496,17 +524,19 @@ namespace ARC_Outlook_Plugin
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Get reciptent error: " + ex.Message);
                 }
             }
             return list.ToArray();
         }
 
+        // Get information account:
         public Accounts GetInformationAcounts()
         {
             return this.Application.Session.Accounts;
         }
 
+        // Save new infor of current user
         public void SaveYourInfo(string host, string email, string token)
         {
             try
@@ -518,10 +548,11 @@ namespace ARC_Outlook_Plugin
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Error save new info: " + ex.Message);
             }
         }
 
+        // Check default login: user logged or not???
         public string CheckDefaultLogin()
         {
             bool flag = Settings.Default.email != null;
@@ -537,65 +568,68 @@ namespace ARC_Outlook_Plugin
             return result;
         }
 
+        // Trigger event logout on btn logout
         public void TriggerLogoutBtn(string host, string email)
         {
             try
             {
                 this.ResetDefaultInfo(host, email);
-                //this._formAccount = new accountForm();
-                //this._formAccount.ShowDialog();
+                this._formAccount = new accountForm();
+                this._formAccount.ShowDialog();
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Error trigger event logout: " + exception.Message);
             }
         }
 
+        // Login action:
         public static string LoginAction(JObject objData)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
             string thisAddIn;
-            dynamic obj = JObject.Parse(objData.ToString());
-            string str = (string)(obj["host"].ToString() + "/api/mail/loginFromOutlook");
+            dynamic data = JObject.Parse(objData.ToString());
+            string str = (string)(data["host"].ToString() + "/api/mail/loginFromOutlook");
             JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
-            jsonObject.Add("email", obj["email"].ToString());
-            jsonObject.Add("password", obj["password"].ToString());
-            HttpClient httpClient = new HttpClient();
+            jsonObject.Add("email", data["email"].ToString());
+            jsonObject.Add("password", data["password"].ToString());
+            HttpClient httpLoginClient = new HttpClient();
             StringContent stringContent = new StringContent(jsonObject.ToString(), Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> task = httpClient.PostAsync(str, stringContent);
-            HttpResponseMessage result = task.Result;
-            AggregateException exception = task.Exception;
-            TaskStatus status = task.Status;
-            if (!result.IsSuccessStatusCode)
+            Task<HttpResponseMessage> httpResponseLogin = httpLoginClient.PostAsync(str, stringContent);
+            HttpResponseMessage resultLoginResponse = httpResponseLogin.Result;
+            AggregateException exception = httpResponseLogin.Exception;
+            TaskStatus status = httpResponseLogin.Status;
+            if (!resultLoginResponse.IsSuccessStatusCode)
             {
                 thisAddIn = "fail";
             }
             else
             {
-                Task<string> task1 = result.Content.ReadAsStringAsync();
-                if ((task1.Result == null || !(task1.Result != "") ? true : task1.Result == "\"\""))
+                Task<string> responseLogin = resultLoginResponse.Content.ReadAsStringAsync();
+                if ((responseLogin.Result == null || !(responseLogin.Result != "") ? true : responseLogin.Result == "\"\""))
                 {
                     thisAddIn = "fail";
                 }
                 else
                 {
-                    dynamic obj1 = JObject.Parse(task1.Result);
-                    Globals.ThisAddIn.resultLogin = obj1.data;
+                    dynamic dataResponse = JObject.Parse(responseLogin.Result);
+                    Globals.ThisAddIn.resultLogin = dataResponse.data;
                     thisAddIn = (string)((dynamic)Globals.ThisAddIn.resultLogin).ToString();
                 }
             }
             if (thisAddIn == "fail")
             {
-                Globals.ThisAddIn.ResetDefaultInfo(obj["host"].ToString(), obj["email"].ToString());
+                Globals.ThisAddIn.ResetDefaultInfo(data["host"].ToString(), data["email"].ToString());
             }
             else
             {
-                Globals.ThisAddIn.SaveYourInfo(obj["host"].ToString(), obj["email"].ToString(), ((dynamic)Globals.ThisAddIn.resultLogin).ToString());
+                Globals.ThisAddIn.SaveYourInfo(data["host"].ToString(), data["email"].ToString(), ((dynamic)Globals.ThisAddIn.resultLogin).ToString());
+                Globals.ThisAddIn.StartAutoThreads();
             }
-            Globals.ThisAddIn.EventCreateNewNoteAfterEmailSent();
             return thisAddIn;
         }
 
+        // Parse data from email item:
         public static object ParseDataFromEmail(MailItem mail)
         {
             string now = DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -612,7 +646,7 @@ namespace ARC_Outlook_Plugin
             string[] allReciptents = new string[0];
             allReciptents = ThisAddIn.GetAllReciptents(mail);
             hTMLBody = mail.HTMLBody;
-            foreach (Outlook.Attachment attachment in mail.Attachments)
+            foreach (Outlook.Attachment attachment in mail.Attachments) // Convert media attachment to base 64
             {
                 string base64String = null;
                 string fileNameAttachment = string.Concat(now, "_", attachment.FileName);
@@ -636,10 +670,10 @@ namespace ARC_Outlook_Plugin
                 }
                 catch (Exception exception)
                 {
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show("Error convert media to base64: " + exception.Message);
                 }
                 try
-                {
+                { // Format html body email
                     if (property == "")
                     {
                         if (!Directory.Exists(folderAttachments))
@@ -655,7 +689,7 @@ namespace ARC_Outlook_Plugin
                 }
                 catch (Exception exception1)
                 {
-                    MessageBox.Show(exception1.Message);
+                    MessageBox.Show("Format HtmlBody Error: " + exception1.Message);
                 }
             }
             JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
@@ -664,7 +698,7 @@ namespace ARC_Outlook_Plugin
             jsonObject.Add("subject", mail.Subject);
             jsonObject.Add("fromEmail", Settings.Default.email);
             jsonObject.Add("addresses", JsonConvert.SerializeObject(allReciptents));
-            if (Directory.Exists(folderAttachments))
+            if (Directory.Exists(folderAttachments)) // if has attachments:
             {
                 ZipFile.CreateFromDirectory(folderAttachments, zipFilePath);
                 jsonObject.Add("pathAttachment", zipFilePath);

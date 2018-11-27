@@ -189,11 +189,20 @@
     <EmbeddedResource Include="arc-addin.resx">
       <DependentUpon>arc-addin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="messageSuccess.resx">
+      <DependentUpon>messageSuccess.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="messageSuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="messageSuccess.Designer.cs">
+      <DependentUpon>messageSuccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
