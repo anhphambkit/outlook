@@ -22,7 +22,14 @@ namespace ARC_Outlook_Plugin
 
         private void syncBtn_Click(object sender, RibbonControlEventArgs e)
         {
-            Globals.ThisAddIn.StartSyncEmailNow();
+            if (Settings.Default.token != null && Settings.Default.token != "")
+            {
+                Globals.ThisAddIn.StartSyncEmailNow();
+            }
+            else
+            {
+                Globals.ThisAddIn.showAccountForm(false);
+            }
         }
 
         private void cleanDataBtn_Click(object sender, RibbonControlEventArgs e)

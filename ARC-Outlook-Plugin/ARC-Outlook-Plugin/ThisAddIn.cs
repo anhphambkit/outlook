@@ -24,6 +24,7 @@ using Redemption;
 using System.Dynamic;
 using Newtonsoft.Json;
 
+
 namespace ARC_Outlook_Plugin
 {
     public partial class ThisAddIn
@@ -55,6 +56,7 @@ namespace ARC_Outlook_Plugin
         private string tmpResult;
 
         private accountForm _formAccount;
+
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -102,6 +104,8 @@ namespace ARC_Outlook_Plugin
             {
                 try
                 {
+                    RedemptionLoader.DllLocation32Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption.dll";
+                    RedemptionLoader.DllLocation64Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption64.dll";
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                     string hostDefault = Settings.Default.host;
                     string emailDefault = Settings.Default.email;
@@ -124,7 +128,7 @@ namespace ARC_Outlook_Plugin
                             {
                                 dynamic idEmail = emailSync.id;
                                 dynamic attachmentEmails = emailSync.attachments;
-                                RDOSession mAPIOBJECT = new RDOSession();
+                                RDOSession mAPIOBJECT = RedemptionLoader.new_RDOSession();
                                 Store selectedStore = Globals.ThisAddIn.GetSelectedStore(Settings.Default.email);
                                 mAPIOBJECT.MAPIOBJECT = selectedStore.Session.MAPIOBJECT;
                                 RDOFolder defaultFolder = mAPIOBJECT.GetFolderFromPath(selectedStore.GetDefaultFolder(OlDefaultFolders.olFolderSentMail).FullFolderPath);
