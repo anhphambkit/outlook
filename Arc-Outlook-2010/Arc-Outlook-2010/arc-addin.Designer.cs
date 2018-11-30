@@ -112,7 +112,6 @@
             // 
             this.Name = "arc_addin";
             this.RibbonType = "Microsoft.Outlook.Explorer";
-            this.StartFromScratch = true;
             this.Tabs.Add(this.arc_tab);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.arc_addin_Load);
             this.arc_tab.ResumeLayout(false);
