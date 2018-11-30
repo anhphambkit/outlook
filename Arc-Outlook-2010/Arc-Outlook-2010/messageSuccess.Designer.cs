@@ -115,6 +115,7 @@
             this.okBtnSuccessMessage.TabIndex = 0;
             this.okBtnSuccessMessage.Text = "OK";
             this.okBtnSuccessMessage.UseVisualStyleBackColor = false;
+            this.okBtnSuccessMessage.Click += new System.EventHandler(this.okBtnSuccessMessage_Click);
             // 
             // animationSuccess
             // 

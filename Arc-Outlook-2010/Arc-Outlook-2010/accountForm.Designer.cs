@@ -186,6 +186,7 @@
             this.logoutBtn.TabIndex = 5;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // leftActionLogoutPanel
             // 
@@ -208,6 +209,7 @@
             this.cancelLogoutBtn.TabIndex = 12;
             this.cancelLogoutBtn.Text = "Cancel";
             this.cancelLogoutBtn.UseVisualStyleBackColor = false;
+            this.cancelLogoutBtn.Click += new System.EventHandler(this.cancelLogoutBtn_Click);
             // 
             // emailData
             // 
@@ -338,6 +340,7 @@
             this.cancelLoginForm.TabIndex = 12;
             this.cancelLoginForm.Text = "Cancel";
             this.cancelLoginForm.UseVisualStyleBackColor = false;
+            this.cancelLoginForm.Click += new System.EventHandler(this.cancelLoginForm_Click);
             // 
             // rightActionLoginPanel
             // 
@@ -360,6 +363,7 @@
             this.loginBtn.TabIndex = 5;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // errorMessage
             // 
