@@ -152,7 +152,7 @@
     <value>btn_arc</value>
   </data>
   <data name="&gt;&gt;btn_arc.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;btn_arc.Parent" xml:space="preserve">
     <value>arc_btn_group</value>
@@ -194,7 +194,7 @@
     <value>syncBtn</value>
   </data>
   <data name="&gt;&gt;syncBtn.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;syncBtn.Parent" xml:space="preserve">
     <value>arc_btn_group</value>
@@ -209,7 +209,7 @@
     <value>arc_btn_group</value>
   </data>
   <data name="&gt;&gt;arc_btn_group.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;arc_btn_group.Parent" xml:space="preserve">
     <value>arc_tab</value>
@@ -249,7 +249,7 @@
     <value>cleanDataBtn</value>
   </data>
   <data name="&gt;&gt;cleanDataBtn.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;cleanDataBtn.Parent" xml:space="preserve">
     <value>settingGroupBtn</value>
@@ -261,10 +261,10 @@
     <value>settingGroupBtn</value>
   </data>
   <data name="&gt;&gt;settingGroupBtn.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonGroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonGroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;settingGroupBtn.Parent" xml:space="preserve">
-    <value>group1</value>
+    <value>group_setting</value>
   </data>
   <data name="&gt;&gt;settingGroupBtn.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -295,10 +295,10 @@
     <value>inforBtn</value>
   </data>
   <data name="&gt;&gt;inforBtn.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;inforBtn.Parent" xml:space="preserve">
-    <value>group1</value>
+    <value>group_setting</value>
   </data>
   <data name="&gt;&gt;inforBtn.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -764,27 +764,27 @@
     <value>arcWebBtn</value>
   </data>
   <data name="&gt;&gt;arcWebBtn.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.ButtonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;arcWebBtn.Parent" xml:space="preserve">
-    <value>group1</value>
+    <value>group_setting</value>
   </data>
   <data name="&gt;&gt;arcWebBtn.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="group1.Label" xml:space="preserve">
+  <data name="group_setting.Label" xml:space="preserve">
     <value>Setting</value>
   </data>
-  <data name="&gt;&gt;group1.Name" xml:space="preserve">
-    <value>group1</value>
+  <data name="&gt;&gt;group_setting.Name" xml:space="preserve">
+    <value>group_setting</value>
   </data>
-  <data name="&gt;&gt;group1.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="&gt;&gt;group_setting.Type" xml:space="preserve">
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GroupView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="&gt;&gt;group1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;group_setting.Parent" xml:space="preserve">
     <value>arc_tab</value>
   </data>
-  <data name="&gt;&gt;group1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;group_setting.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="arc_tab.Label" xml:space="preserve">
@@ -794,7 +794,7 @@
     <value>arc_tab</value>
   </data>
   <data name="&gt;&gt;arc_tab.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.TabView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.TabView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -806,7 +806,7 @@
     <value>arc_addin.OfficeMenu</value>
   </data>
   <data name="&gt;&gt;arc_addin.OfficeMenu.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.OfficeMenuView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.OfficeMenuView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="&gt;&gt;arc_addin.OfficeMenu.Parent" xml:space="preserve">
     <value>$this</value>
@@ -818,6 +818,6 @@
     <value>arc_addin</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GenericRibbonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>Microsoft.VisualStudio.Tools.Office.Ribbon.View.GenericRibbonView, Microsoft.VisualStudio.Tools.Office.Designer, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

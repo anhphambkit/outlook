@@ -39,21 +39,21 @@
             this.arc_btn_group = this.Factory.CreateRibbonGroup();
             this.btn_arc = this.Factory.CreateRibbonButton();
             this.syncBtn = this.Factory.CreateRibbonButton();
-            this.group1 = this.Factory.CreateRibbonGroup();
+            this.group_setting = this.Factory.CreateRibbonGroup();
             this.settingGroupBtn = this.Factory.CreateRibbonButtonGroup();
             this.cleanDataBtn = this.Factory.CreateRibbonButton();
             this.inforBtn = this.Factory.CreateRibbonButton();
             this.arcWebBtn = this.Factory.CreateRibbonButton();
             this.arc_tab.SuspendLayout();
             this.arc_btn_group.SuspendLayout();
-            this.group1.SuspendLayout();
+            this.group_setting.SuspendLayout();
             this.settingGroupBtn.SuspendLayout();
             this.SuspendLayout();
             // 
             // arc_tab
             // 
             this.arc_tab.Groups.Add(this.arc_btn_group);
-            this.arc_tab.Groups.Add(this.group1);
+            this.arc_tab.Groups.Add(this.group_setting);
             resources.ApplyResources(this.arc_tab, "arc_tab");
             this.arc_tab.Name = "arc_tab";
             // 
@@ -80,13 +80,13 @@
             this.syncBtn.ShowImage = true;
             this.syncBtn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.syncBtn_Click);
             // 
-            // group1
+            // group_setting
             // 
-            this.group1.Items.Add(this.settingGroupBtn);
-            this.group1.Items.Add(this.inforBtn);
-            this.group1.Items.Add(this.arcWebBtn);
-            resources.ApplyResources(this.group1, "group1");
-            this.group1.Name = "group1";
+            this.group_setting.Items.Add(this.settingGroupBtn);
+            this.group_setting.Items.Add(this.inforBtn);
+            this.group_setting.Items.Add(this.arcWebBtn);
+            resources.ApplyResources(this.group_setting, "group_setting");
+            this.group_setting.Name = "group_setting";
             // 
             // settingGroupBtn
             // 
@@ -125,8 +125,8 @@
             this.arc_tab.PerformLayout();
             this.arc_btn_group.ResumeLayout(false);
             this.arc_btn_group.PerformLayout();
-            this.group1.ResumeLayout(false);
-            this.group1.PerformLayout();
+            this.group_setting.ResumeLayout(false);
+            this.group_setting.PerformLayout();
             this.settingGroupBtn.ResumeLayout(false);
             this.settingGroupBtn.PerformLayout();
             this.ResumeLayout(false);
@@ -138,7 +138,7 @@
         private Microsoft.Office.Tools.Ribbon.RibbonTab arc_tab;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_arc;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton syncBtn;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group_setting;
         internal Microsoft.Office.Tools.Ribbon.RibbonButtonGroup settingGroupBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton cleanDataBtn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton inforBtn;

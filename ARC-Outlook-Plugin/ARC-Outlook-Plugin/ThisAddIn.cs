@@ -104,8 +104,6 @@ namespace ARC_Outlook_Plugin
             {
                 try
                 {
-                    RedemptionLoader.DllLocation32Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption.dll";
-                    RedemptionLoader.DllLocation64Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption64.dll";
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
                     string hostDefault = Settings.Default.host;
                     string emailDefault = Settings.Default.email;

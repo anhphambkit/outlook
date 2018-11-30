@@ -65,6 +65,7 @@
             this.emailLabel = new System.Windows.Forms.Label();
             this.hostFieldPanel = new System.Windows.Forms.Panel();
             this.inputHostPanel = new System.Windows.Forms.Panel();
+            this.hostInput = new System.Windows.Forms.ComboBox();
             this.labelFieldHostPanel = new System.Windows.Forms.Panel();
             this.hostLabel = new System.Windows.Forms.Label();
             this.titleLoginPanel = new System.Windows.Forms.Panel();
@@ -74,7 +75,6 @@
             this.titlePlugin = new System.Windows.Forms.Label();
             this.leftLogoPanel = new System.Windows.Forms.Panel();
             this.logoPlugin = new System.Windows.Forms.PictureBox();
-            this.hostInput = new System.Windows.Forms.ComboBox();
             this.formGeneralPanel.SuspendLayout();
             this.rightFormPanel.SuspendLayout();
             this.logoutPanel.SuspendLayout();
@@ -128,7 +128,7 @@
             this.rightFormPanel.Controls.Add(this.formLoginPanel);
             this.rightFormPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.rightFormPanel.Location = new System.Drawing.Point(490, 70);
-            this.rightFormPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rightFormPanel.Margin = new System.Windows.Forms.Padding(2);
             this.rightFormPanel.Name = "rightFormPanel";
             this.rightFormPanel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.rightFormPanel.Size = new System.Drawing.Size(357, 342);
@@ -159,7 +159,7 @@
             this.actionsLogoutPanel.Controls.Add(this.leftActionLogoutPanel);
             this.actionsLogoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.actionsLogoutPanel.Location = new System.Drawing.Point(0, 208);
-            this.actionsLogoutPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.actionsLogoutPanel.Margin = new System.Windows.Forms.Padding(2);
             this.actionsLogoutPanel.Name = "actionsLogoutPanel";
             this.actionsLogoutPanel.Size = new System.Drawing.Size(345, 70);
             this.actionsLogoutPanel.TabIndex = 13;
@@ -180,7 +180,7 @@
             this.logoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
             this.logoutBtn.Location = new System.Drawing.Point(5, 20);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.logoutBtn.Name = "logoutBtn";
             this.logoutBtn.Size = new System.Drawing.Size(86, 32);
             this.logoutBtn.TabIndex = 5;
@@ -203,7 +203,7 @@
             this.cancelLogoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelLogoutBtn.ForeColor = System.Drawing.Color.White;
             this.cancelLogoutBtn.Location = new System.Drawing.Point(89, 20);
-            this.cancelLogoutBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelLogoutBtn.Margin = new System.Windows.Forms.Padding(2);
             this.cancelLogoutBtn.Name = "cancelLogoutBtn";
             this.cancelLogoutBtn.Size = new System.Drawing.Size(78, 31);
             this.cancelLogoutBtn.TabIndex = 12;
@@ -324,7 +324,7 @@
             this.leftActionLoginPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftActionLoginPanel.Location = new System.Drawing.Point(0, 0);
             this.leftActionLoginPanel.Name = "leftActionLoginPanel";
-            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(5);
             this.leftActionLoginPanel.Size = new System.Drawing.Size(168, 39);
             this.leftActionLoginPanel.TabIndex = 0;
             // 
@@ -334,7 +334,7 @@
             this.cancelLoginForm.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelLoginForm.ForeColor = System.Drawing.Color.White;
             this.cancelLoginForm.Location = new System.Drawing.Point(88, 3);
-            this.cancelLoginForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cancelLoginForm.Margin = new System.Windows.Forms.Padding(2);
             this.cancelLoginForm.Name = "cancelLoginForm";
             this.cancelLoginForm.Size = new System.Drawing.Size(78, 29);
             this.cancelLoginForm.TabIndex = 12;
@@ -357,7 +357,7 @@
             this.loginBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.ForeColor = System.Drawing.Color.White;
             this.loginBtn.Location = new System.Drawing.Point(2, 3);
-            this.loginBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.loginBtn.Margin = new System.Windows.Forms.Padding(2);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(86, 29);
             this.loginBtn.TabIndex = 5;
@@ -428,7 +428,7 @@
             this.passwordInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.passwordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordInput.Location = new System.Drawing.Point(0, 0);
-            this.passwordInput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.passwordInput.Margin = new System.Windows.Forms.Padding(2);
             this.passwordInput.Name = "passwordInput";
             this.passwordInput.Size = new System.Drawing.Size(327, 26);
             this.passwordInput.TabIndex = 1;
@@ -484,7 +484,7 @@
             this.emailListSelect.IntegralHeight = false;
             this.emailListSelect.ItemHeight = 20;
             this.emailListSelect.Location = new System.Drawing.Point(0, 0);
-            this.emailListSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.emailListSelect.Margin = new System.Windows.Forms.Padding(2);
             this.emailListSelect.Name = "emailListSelect";
             this.emailListSelect.Size = new System.Drawing.Size(327, 28);
             this.emailListSelect.TabIndex = 2;
@@ -527,6 +527,24 @@
             this.inputHostPanel.Name = "inputHostPanel";
             this.inputHostPanel.Size = new System.Drawing.Size(327, 30);
             this.inputHostPanel.TabIndex = 1;
+            // 
+            // hostInput
+            // 
+            this.hostInput.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hostInput.DropDownHeight = 120;
+            this.hostInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.hostInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hostInput.FormattingEnabled = true;
+            this.hostInput.IntegralHeight = false;
+            this.hostInput.ItemHeight = 20;
+            this.hostInput.Items.AddRange(new object[] {
+            "https://arc-dev.bigin.top",
+            "https://arc-test.bigin.top"});
+            this.hostInput.Location = new System.Drawing.Point(0, 0);
+            this.hostInput.Margin = new System.Windows.Forms.Padding(2);
+            this.hostInput.Name = "hostInput";
+            this.hostInput.Size = new System.Drawing.Size(327, 28);
+            this.hostInput.TabIndex = 3;
             // 
             // labelFieldHostPanel
             // 
@@ -605,7 +623,7 @@
             this.leftLogoPanel.Controls.Add(this.logoPlugin);
             this.leftLogoPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftLogoPanel.Location = new System.Drawing.Point(75, 70);
-            this.leftLogoPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leftLogoPanel.Margin = new System.Windows.Forms.Padding(2);
             this.leftLogoPanel.Name = "leftLogoPanel";
             this.leftLogoPanel.Size = new System.Drawing.Size(385, 342);
             this.leftLogoPanel.TabIndex = 0;
@@ -617,30 +635,12 @@
             this.logoPlugin.Cursor = System.Windows.Forms.Cursors.No;
             this.logoPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logoPlugin.Location = new System.Drawing.Point(0, 0);
-            this.logoPlugin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logoPlugin.Margin = new System.Windows.Forms.Padding(2);
             this.logoPlugin.Name = "logoPlugin";
             this.logoPlugin.Size = new System.Drawing.Size(385, 342);
             this.logoPlugin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoPlugin.TabIndex = 0;
             this.logoPlugin.TabStop = false;
-            // 
-            // hostInput
-            // 
-            this.hostInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hostInput.DropDownHeight = 120;
-            this.hostInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.hostInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hostInput.FormattingEnabled = true;
-            this.hostInput.IntegralHeight = false;
-            this.hostInput.ItemHeight = 20;
-            this.hostInput.Items.AddRange(new object[] {
-            "https://arc-dev.bigin.top",
-            "https://arc-test.bigin.top"});
-            this.hostInput.Location = new System.Drawing.Point(0, 0);
-            this.hostInput.Margin = new System.Windows.Forms.Padding(2);
-            this.hostInput.Name = "hostInput";
-            this.hostInput.Size = new System.Drawing.Size(327, 28);
-            this.hostInput.TabIndex = 3;
             // 
             // accountForm
             // 
@@ -655,9 +655,9 @@
             this.Controls.Add(this.formGeneralPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "accountForm";
-            this.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARC Outlook Plugin";
             this.formGeneralPanel.ResumeLayout(false);

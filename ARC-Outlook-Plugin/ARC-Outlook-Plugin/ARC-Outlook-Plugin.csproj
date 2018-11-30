@@ -31,7 +31,7 @@
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\THINKPAD\Documents\Workspace\arc-outlook\Publish\ARC1316x64\</PublishUrl>
+    <PublishUrl>C:\Users\THINKPAD\Documents\Workspace\arc-outlook\Publish\ArcOutlook1316x86\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
     <ApplicationVersion>1.0.0.8</ApplicationVersion>
@@ -57,9 +57,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x64">
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x86">
       <Visible>False</Visible>
-      <ProductName>Visual C++ "14" Runtime Libraries %28x64%29</ProductName>
+      <ProductName>Visual C++ "14" Runtime Libraries %28x86%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">
@@ -281,6 +281,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Interop.Redemption.dll" />
     <Content Include="Redemption.dll" />
     <Content Include="Redemption64.dll" />
   </ItemGroup>

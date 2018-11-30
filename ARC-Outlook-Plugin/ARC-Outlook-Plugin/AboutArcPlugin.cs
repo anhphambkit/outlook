@@ -21,6 +21,7 @@ namespace ARC_Outlook_Plugin
         {
             base.ShowDialog();
         }
+
         #region Assembly Attribute Accessors
 
         public string AssemblyTitle

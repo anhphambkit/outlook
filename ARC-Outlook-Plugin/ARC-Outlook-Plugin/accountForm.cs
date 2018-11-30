@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Json;
 using System.Windows.Forms;
 using ARC_Outlook_Plugin.Properties;
 using Outlook = Microsoft.Office.Interop.Outlook;

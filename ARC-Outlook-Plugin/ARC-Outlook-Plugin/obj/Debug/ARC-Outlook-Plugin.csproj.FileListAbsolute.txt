@@ -126,6 +126,7 @@ C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\Newtonsoft.Json.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Json.dll
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csprojAssemblyReference.cache
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.AboutArcPlugin.resources
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.accountForm.resources
 C:\Users\THINKPAD\Documents\Workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.arc_addin.resources

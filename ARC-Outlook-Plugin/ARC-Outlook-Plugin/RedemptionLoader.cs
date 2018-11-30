@@ -15,9 +15,9 @@ namespace Redemption
     {
         #region public methods
         //64 bit dll location - defaults to <assemblydir>\Redemption64.dll
-        public static string DllLocation64Bit;
+        public static string DllLocation64Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption64.dll";
         //32 bit dll location - defaults to <assemblydir>\Redemption.dll
-        public static string DllLocation32Bit;
+        public static string DllLocation32Bit = AppDomain.CurrentDomain.BaseDirectory + "\\Redemption.dll";
 
 
         //The only creatable RDO object - RDOSession
