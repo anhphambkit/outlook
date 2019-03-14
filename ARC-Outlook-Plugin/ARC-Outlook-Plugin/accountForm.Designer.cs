@@ -539,7 +539,8 @@
             this.hostInput.ItemHeight = 20;
             this.hostInput.Items.AddRange(new object[] {
             "https://arc-dev.bigin.top",
-            "https://arc-test.bigin.top"});
+            "https://arc-test.bigin.top",
+            "https://arc-production.bigin.top"});
             this.hostInput.Location = new System.Drawing.Point(0, 0);
             this.hostInput.Margin = new System.Windows.Forms.Padding(2);
             this.hostInput.Name = "hostInput";

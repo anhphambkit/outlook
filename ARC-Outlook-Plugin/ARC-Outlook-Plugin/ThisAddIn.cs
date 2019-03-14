@@ -154,7 +154,7 @@ namespace ARC_Outlook_Plugin
                                     {
                                         if (attachmentEmail != (dynamic)null)
                                         {
-                                            string urlAttachment = ((string)attachmentEmail.path_string).Replace("http://localhost", hostDefault);
+                                            string urlAttachment = (string)attachmentEmail.path_string;
                                             now.Attachments.Add(urlAttachment);
                                         }
                                     }
@@ -511,13 +511,38 @@ namespace ARC_Outlook_Plugin
         }
 
         // Get all reciptents|emails from mail item:
+        public static string[] GetAllReciptentsByType(MailItem mail, int type)
+        {
+            List<string> list = new List<string>();
+            Recipients recipients = mail.Recipients;
+            foreach (Outlook.Recipient recipient in recipients)
+            {
+                try
+                {
+                    bool flag = recipient.Address != null && recipient.Address != "" && recipient.Type == type;
+                    if (flag)
+                    {
+                        if (recipient.AddressEntry.Type == "EX")  // Check reciptent is exchange account???
+                            list.Add(recipient.AddressEntry.GetExchangeUser().PrimarySmtpAddress);
+                        else
+                            list.Add(recipient.Address);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Get reciptent error: " + ex.Message);
+                }
+            }
+            return list.ToArray();
+        }
+
+        // Get all reciptents|emails from mail item:
         public static string[] GetAllReciptents(MailItem mail)
         {
             List<string> list = new List<string>();
             Recipients recipients = mail.Recipients;
-            foreach (object obj in recipients)
+            foreach (Outlook.Recipient recipient in recipients)
             {
-                Recipient recipient = (Recipient)obj;
                 try
                 {
                     bool flag = recipient.Address != null && recipient.Address != "";
@@ -650,8 +675,12 @@ namespace ARC_Outlook_Plugin
             string folderAttachments = string.Concat(new object[] { folderRoot, "\\", now, "-attachments" });
             string zipFileName = string.Concat(new object[] { now, "-attachments.zip" });
             string zipFilePath = string.Concat(folderRoot, "\\", zipFileName);
-            string[] allReciptents = new string[0];
-            allReciptents = ThisAddIn.GetAllReciptents(mail);
+            string[] toReciptents = new string[0];
+            string[] ccReciptents = new string[0];
+            string[] bccReciptents = new string[0];
+            toReciptents = ThisAddIn.GetAllReciptentsByType(mail, 1); // Email Sent to
+            ccReciptents = ThisAddIn.GetAllReciptentsByType(mail, 2); // Email Sent cc
+            bccReciptents = ThisAddIn.GetAllReciptentsByType(mail, 3); // Email Sent bcc
             hTMLBody = mail.HTMLBody;
             foreach (Outlook.Attachment attachment in mail.Attachments) // Convert media attachment to base 64
             {
@@ -699,18 +728,23 @@ namespace ARC_Outlook_Plugin
                     MessageBox.Show("Format HtmlBody Error: " + exception1.Message);
                 }
             }
+            
             JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
             jsonObject.Add("contentMail", hTMLBody);
             jsonObject.Add("entry_id", mail.EntryID);
             jsonObject.Add("subject", mail.Subject);
+            jsonObject.Add("sent_on", mail.SentOn.ToString());
             jsonObject.Add("fromEmail", Settings.Default.email);
-            jsonObject.Add("addresses", JsonConvert.SerializeObject(allReciptents));
+            jsonObject.Add("to_addresses", JsonConvert.SerializeObject(toReciptents));
+            jsonObject.Add("cc_addresses", JsonConvert.SerializeObject(ccReciptents));
+            jsonObject.Add("bcc_addresses", JsonConvert.SerializeObject(bccReciptents));
             if (Directory.Exists(folderAttachments)) // if has attachments:
             {
                 ZipFile.CreateFromDirectory(folderAttachments, zipFilePath);
                 jsonObject.Add("pathAttachment", zipFilePath);
                 jsonObject.Add("fileName", zipFileName);
             }
+           
             return jsonObject;
         }
 
