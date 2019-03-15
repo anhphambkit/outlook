@@ -31,11 +31,11 @@
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\THINKPAD\Documents\Workspace\arc-outlook\Publish\ArcOutlook1316x86\</PublishUrl>
+    <PublishUrl>C:\Users\Anh Pham\Documents\workspace\arc-outlook\production\ARCPluginx86\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
-    <ApplicationVersion>1.0.0.8</ApplicationVersion>
-    <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
+    <ApplicationVersion>1.0.0.10</ApplicationVersion>
+    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
@@ -249,6 +249,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
+    <None Include="ARC-Outlook-Plugin_1_TemporaryKey.pfx" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -294,10 +295,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>ARC-Outlook-Plugin_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>ARC-Outlook-Plugin_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>E5AE233913ED300DE1A42BAB6D93873D7B11BB44</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>6F3C7BC05C73DD3C089115877C2566BDAE22B200</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
