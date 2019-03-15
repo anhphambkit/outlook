@@ -401,22 +401,39 @@ namespace ARC_Outlook_Plugin
                 MailItem mailItem = objectMail as MailItem;
                 object dataEmail = ThisAddIn.ParseDataFromEmail(mailItem);
                 dynamic data = JObject.Parse(dataEmail.ToString());
+
+                // Define request:
+                HttpClient uploadAttachmentClient = new HttpClient();
+                uploadAttachmentClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
+                uploadAttachmentClient.BaseAddress = new Uri(host);
+                uploadAttachmentClient.DefaultRequestHeaders.Accept.Clear();
+                uploadAttachmentClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                string urlUploadAttachment = host + "/api/mail/uploadAttachmentFromClient";
+                MultipartFormDataContent form = new MultipartFormDataContent();
+
+                // Add entry_id data
+
+                StringContent dataCreateNote = new StringContent(dataEmail.ToString(), Encoding.UTF8, "application/json");
+                form.Add(dataCreateNote, "data_email");
+
+                /*
+                // Add Data email
+                StringContent dataCreateNote = new StringContent(dataEmail.ToString(), Encoding.UTF8, "application/json");
+                form.Add(dataCreateNote);
+                 jsonObject.Add("contentMail", hTMLBody);
+            jsonObject.Add("entry_id", mail.EntryID);
+            jsonObject.Add("subject", mail.Subject);
+            jsonObject.Add("sent_on", mail.SentOn.ToString());
+            jsonObject.Add("fromEmail", Settings.Default.email);
+            jsonObject.Add("to_addresses", JsonConvert.SerializeObject(toReciptents));
+            jsonObject.Add("cc_addresses", JsonConvert.SerializeObject(ccReciptents));
+            jsonObject.Add("bcc_addresses", JsonConvert.SerializeObject(bccReciptents));
+                */
+
                 if (data.fileName != null) // Check if has attachment, upload it to server
                 {
-                    HttpClient uploadAttachmentClient = new HttpClient();
-                    uploadAttachmentClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("BearerOutlook", "= " + Settings.Default.token + "&&&Email=" + Settings.Default.email);
-                    uploadAttachmentClient.BaseAddress = new Uri(host);
-                    uploadAttachmentClient.DefaultRequestHeaders.Accept.Clear();
-                    uploadAttachmentClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    MultipartFormDataContent form = new MultipartFormDataContent();
                     HttpContent content = new StringContent("fileToUpload");
-                    Dictionary<string, string> postDataUploadAttachment = new Dictionary<string, string>();
-                    postDataUploadAttachment.Add("entry_id", data.entry_id.ToString());
-
-                    HttpContent DictionaryItems = new FormUrlEncodedContent(postDataUploadAttachment);
                     form.Add(content, "fileToUpload");
-                    form.Add(DictionaryItems, "medicineOrder");
-
                     var stream = new FileStream(data.pathAttachment.ToString(), FileMode.Open);
                     content = new StreamContent(stream);
                     content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
@@ -425,22 +442,22 @@ namespace ARC_Outlook_Plugin
                         FileName = data.fileName.ToString()
                     };
                     form.Add(content);
-
-                    HttpResponseMessage httpResponseUploadMessage = null;
-
-                    string urlUploadAttachment = host + "/api/mail/uploadAttachmentFromClient";
-                    try
-                    {
-                        httpResponseUploadMessage = (uploadAttachmentClient.PostAsync(urlUploadAttachment, form)).Result;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Upload Attachments Error: " + ex.Message);
-                    }
-                    
-                    string resultUpload = httpResponseUploadMessage.Content.ReadAsStringAsync().Result;
                 }
 
+                HttpResponseMessage httpResponseUploadMessage = null;
+
+                try
+                {
+                    httpResponseUploadMessage = (uploadAttachmentClient.PostAsync(urlUploadAttachment, form)).Result;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Upload Attachments Error: " + ex.Message);
+                }
+
+                string resultUpload = httpResponseUploadMessage.Content.ReadAsStringAsync().Result;
+
+                /*
                 // Create new note:
                 string newNoteApi = host + "/api/mail/saveNoteFromEmailDataClient";
                 HttpClient createNewNoteHttpClient = new HttpClient();
@@ -456,6 +473,7 @@ namespace ARC_Outlook_Plugin
                     MessageBox.Show("Create Note Error: " + ex.Message);
                 }
                 string resultCreateNewNote = httpResponseCreateNewMessage.Content.ReadAsStringAsync().Result;
+                */
             }
             catch (Exception ex)
             {
@@ -682,6 +700,23 @@ namespace ARC_Outlook_Plugin
             ccReciptents = ThisAddIn.GetAllReciptentsByType(mail, 2); // Email Sent cc
             bccReciptents = ThisAddIn.GetAllReciptentsByType(mail, 3); // Email Sent bcc
             hTMLBody = mail.HTMLBody;
+
+            // Define object data email:
+            JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
+            jsonObject.Add("contentMail", hTMLBody);
+            jsonObject.Add("entry_id", mail.EntryID);
+            jsonObject.Add("subject", mail.Subject);
+            jsonObject.Add("sent_on", mail.SentOn.ToString());
+            jsonObject.Add("fromEmail", Settings.Default.email);
+            jsonObject.Add("to_addresses", JsonConvert.SerializeObject(toReciptents));
+            jsonObject.Add("cc_addresses", JsonConvert.SerializeObject(ccReciptents));
+            jsonObject.Add("bcc_addresses", JsonConvert.SerializeObject(bccReciptents));
+            if (Directory.Exists(folderAttachments)) // if has attachments:
+            {
+                ZipFile.CreateFromDirectory(folderAttachments, zipFilePath);
+                jsonObject.Add("pathAttachment", zipFilePath);
+                jsonObject.Add("fileName", zipFileName);
+            }
             foreach (Outlook.Attachment attachment in mail.Attachments) // Convert media attachment to base 64
             {
                 string base64String = null;
@@ -729,21 +764,7 @@ namespace ARC_Outlook_Plugin
                 }
             }
             
-            JsonObject jsonObject = new JsonObject(new KeyValuePair<string, JsonValue>[0]);
-            jsonObject.Add("contentMail", hTMLBody);
-            jsonObject.Add("entry_id", mail.EntryID);
-            jsonObject.Add("subject", mail.Subject);
-            jsonObject.Add("sent_on", mail.SentOn.ToString());
-            jsonObject.Add("fromEmail", Settings.Default.email);
-            jsonObject.Add("to_addresses", JsonConvert.SerializeObject(toReciptents));
-            jsonObject.Add("cc_addresses", JsonConvert.SerializeObject(ccReciptents));
-            jsonObject.Add("bcc_addresses", JsonConvert.SerializeObject(bccReciptents));
-            if (Directory.Exists(folderAttachments)) // if has attachments:
-            {
-                ZipFile.CreateFromDirectory(folderAttachments, zipFilePath);
-                jsonObject.Add("pathAttachment", zipFilePath);
-                jsonObject.Add("fileName", zipFileName);
-            }
+            
            
             return jsonObject;
         }
