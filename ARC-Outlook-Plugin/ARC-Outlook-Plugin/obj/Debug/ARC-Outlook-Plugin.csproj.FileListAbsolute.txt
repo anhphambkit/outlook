@@ -157,14 +157,6 @@ C:\Users\nobikun1412\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outl
 C:\Users\nobikun1412\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.GenerateResource.Cache
 C:\Users\nobikun1412\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
 C:\Users\nobikun1412\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.AboutArcPlugin.resources
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.accountForm.resources
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.arc_addin.resources
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.messageSuccess.resources
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.Properties.Resources.resources
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.GenerateResource.cache
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
-C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.dll.config
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.dll
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\ARC-Outlook-Plugin.pdb
@@ -271,5 +263,14 @@ C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\System.Json.dll
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.AboutArcPlugin.resources
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.accountForm.resources
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.arc_addin.resources
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.messageSuccess.resources
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC_Outlook_Plugin.Properties.Resources.resources
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.GenerateResource.cache
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.CoreCompileInputs.cache
 C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csproj.CopyComplete
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.dll
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.pdb
+C:\Users\Anh Pham\Documents\workspace\arc-outlook\ARC-Outlook-Plugin\ARC-Outlook-Plugin\obj\Debug\ARC-Outlook-Plugin.csprojAssemblyReference.cache

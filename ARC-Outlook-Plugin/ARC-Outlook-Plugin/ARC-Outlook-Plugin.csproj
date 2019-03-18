@@ -31,11 +31,11 @@
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>C:\Users\Anh Pham\Documents\workspace\arc-outlook\production\ARCPluginx86\</PublishUrl>
+    <PublishUrl>C:\Users\Anh Pham\Documents\workspace\arc-outlook\arc-portal\\ARCPluginx64\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
     <ApplicationVersion>1.0.0.10</ApplicationVersion>
-    <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
+    <AutoIncrementApplicationRevision>false</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
@@ -57,9 +57,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x86">
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x64">
       <Visible>False</Visible>
-      <ProductName>Visual C++ "14" Runtime Libraries %28x86%29</ProductName>
+      <ProductName>Visual C++ "14" Runtime Libraries %28x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.VSTORuntime.4.0">

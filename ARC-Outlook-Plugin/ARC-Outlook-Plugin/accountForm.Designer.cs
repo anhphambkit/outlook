@@ -325,7 +325,7 @@
             this.leftActionLoginPanel.Location = new System.Drawing.Point(0, 0);
             this.leftActionLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leftActionLoginPanel.Name = "leftActionLoginPanel";
-            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(8);
             this.leftActionLoginPanel.Size = new System.Drawing.Size(252, 60);
             this.leftActionLoginPanel.TabIndex = 0;
             // 
@@ -542,7 +542,7 @@
             this.hostInput.IntegralHeight = false;
             this.hostInput.ItemHeight = 29;
             this.hostInput.Items.AddRange(new object[] {
-            "https://arc-production.bigin.top"});
+            "https://newarcportal.com"});
             this.hostInput.Location = new System.Drawing.Point(0, 0);
             this.hostInput.Name = "hostInput";
             this.hostInput.Size = new System.Drawing.Size(490, 37);
