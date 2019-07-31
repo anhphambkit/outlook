@@ -114,11 +114,11 @@
             this.formGeneralPanel.Controls.Add(this.rightFormPanel);
             this.formGeneralPanel.Controls.Add(this.leftLogoPanel);
             this.formGeneralPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formGeneralPanel.Location = new System.Drawing.Point(3, 3);
-            this.formGeneralPanel.Margin = new System.Windows.Forms.Padding(25, 26, 25, 26);
+            this.formGeneralPanel.Location = new System.Drawing.Point(4, 5);
+            this.formGeneralPanel.Margin = new System.Windows.Forms.Padding(38, 40, 38, 40);
             this.formGeneralPanel.Name = "formGeneralPanel";
-            this.formGeneralPanel.Padding = new System.Windows.Forms.Padding(75, 70, 75, 70);
-            this.formGeneralPanel.Size = new System.Drawing.Size(922, 482);
+            this.formGeneralPanel.Padding = new System.Windows.Forms.Padding(112, 108, 112, 108);
+            this.formGeneralPanel.Size = new System.Drawing.Size(1384, 741);
             this.formGeneralPanel.TabIndex = 11;
             // 
             // rightFormPanel
@@ -127,11 +127,10 @@
             this.rightFormPanel.Controls.Add(this.logoutPanel);
             this.rightFormPanel.Controls.Add(this.formLoginPanel);
             this.rightFormPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightFormPanel.Location = new System.Drawing.Point(490, 70);
-            this.rightFormPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.rightFormPanel.Location = new System.Drawing.Point(736, 108);
             this.rightFormPanel.Name = "rightFormPanel";
-            this.rightFormPanel.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-            this.rightFormPanel.Size = new System.Drawing.Size(357, 342);
+            this.rightFormPanel.Padding = new System.Windows.Forms.Padding(15, 0, 15, 15);
+            this.rightFormPanel.Size = new System.Drawing.Size(536, 525);
             this.rightFormPanel.TabIndex = 1;
             // 
             // logoutPanel
@@ -148,9 +147,10 @@
             this.logoutPanel.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.logoutPanel.Font = new System.Drawing.Font("Microsoft Tai Le", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutPanel.ForeColor = System.Drawing.Color.DimGray;
-            this.logoutPanel.Location = new System.Drawing.Point(7, 24);
+            this.logoutPanel.Location = new System.Drawing.Point(10, 37);
+            this.logoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.logoutPanel.Name = "logoutPanel";
-            this.logoutPanel.Size = new System.Drawing.Size(347, 280);
+            this.logoutPanel.Size = new System.Drawing.Size(520, 430);
             this.logoutPanel.TabIndex = 13;
             // 
             // actionsLogoutPanel
@@ -158,19 +158,19 @@
             this.actionsLogoutPanel.Controls.Add(this.rightActionLogoutPanel);
             this.actionsLogoutPanel.Controls.Add(this.leftActionLogoutPanel);
             this.actionsLogoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.actionsLogoutPanel.Location = new System.Drawing.Point(0, 208);
-            this.actionsLogoutPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.actionsLogoutPanel.Location = new System.Drawing.Point(0, 320);
             this.actionsLogoutPanel.Name = "actionsLogoutPanel";
-            this.actionsLogoutPanel.Size = new System.Drawing.Size(345, 70);
+            this.actionsLogoutPanel.Size = new System.Drawing.Size(518, 108);
             this.actionsLogoutPanel.TabIndex = 13;
             // 
             // rightActionLogoutPanel
             // 
             this.rightActionLogoutPanel.Controls.Add(this.logoutBtn);
             this.rightActionLogoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rightActionLogoutPanel.Location = new System.Drawing.Point(172, 0);
+            this.rightActionLogoutPanel.Location = new System.Drawing.Point(258, 0);
+            this.rightActionLogoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rightActionLogoutPanel.Name = "rightActionLogoutPanel";
-            this.rightActionLogoutPanel.Size = new System.Drawing.Size(172, 70);
+            this.rightActionLogoutPanel.Size = new System.Drawing.Size(258, 108);
             this.rightActionLogoutPanel.TabIndex = 2;
             // 
             // logoutBtn
@@ -179,10 +179,9 @@
             this.logoutBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(17)))), ((int)(((byte)(63)))));
             this.logoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logoutBtn.ForeColor = System.Drawing.Color.White;
-            this.logoutBtn.Location = new System.Drawing.Point(5, 20);
-            this.logoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.logoutBtn.Location = new System.Drawing.Point(8, 31);
             this.logoutBtn.Name = "logoutBtn";
-            this.logoutBtn.Size = new System.Drawing.Size(86, 32);
+            this.logoutBtn.Size = new System.Drawing.Size(129, 54);
             this.logoutBtn.TabIndex = 5;
             this.logoutBtn.Text = "Logout";
             this.logoutBtn.UseVisualStyleBackColor = false;
@@ -193,8 +192,9 @@
             this.leftActionLogoutPanel.Controls.Add(this.cancelLogoutBtn);
             this.leftActionLogoutPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftActionLogoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.leftActionLogoutPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leftActionLogoutPanel.Name = "leftActionLogoutPanel";
-            this.leftActionLogoutPanel.Size = new System.Drawing.Size(172, 70);
+            this.leftActionLogoutPanel.Size = new System.Drawing.Size(258, 108);
             this.leftActionLogoutPanel.TabIndex = 1;
             // 
             // cancelLogoutBtn
@@ -202,10 +202,9 @@
             this.cancelLogoutBtn.BackColor = System.Drawing.Color.Gray;
             this.cancelLogoutBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelLogoutBtn.ForeColor = System.Drawing.Color.White;
-            this.cancelLogoutBtn.Location = new System.Drawing.Point(89, 20);
-            this.cancelLogoutBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelLogoutBtn.Location = new System.Drawing.Point(134, 31);
             this.cancelLogoutBtn.Name = "cancelLogoutBtn";
-            this.cancelLogoutBtn.Size = new System.Drawing.Size(78, 31);
+            this.cancelLogoutBtn.Size = new System.Drawing.Size(117, 48);
             this.cancelLogoutBtn.TabIndex = 12;
             this.cancelLogoutBtn.Text = "Cancel";
             this.cancelLogoutBtn.UseVisualStyleBackColor = false;
@@ -215,10 +214,9 @@
             // 
             this.emailData.AutoSize = true;
             this.emailData.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailData.Location = new System.Drawing.Point(24, 175);
-            this.emailData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailData.Location = new System.Drawing.Point(36, 269);
             this.emailData.Name = "emailData";
-            this.emailData.Size = new System.Drawing.Size(133, 18);
+            this.emailData.Size = new System.Drawing.Size(195, 25);
             this.emailData.TabIndex = 12;
             this.emailData.Text = "example@gmail.com";
             // 
@@ -226,10 +224,9 @@
             // 
             this.hostData.AutoSize = true;
             this.hostData.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hostData.Location = new System.Drawing.Point(24, 125);
-            this.hostData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hostData.Location = new System.Drawing.Point(36, 192);
             this.hostData.Name = "hostData";
-            this.hostData.Size = new System.Drawing.Size(98, 18);
+            this.hostData.Size = new System.Drawing.Size(144, 25);
             this.hostData.TabIndex = 11;
             this.hostData.Text = "http://arc.bigin";
             this.hostData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -238,9 +235,10 @@
             // 
             this.infoLogoutForm.Dock = System.Windows.Forms.DockStyle.Top;
             this.infoLogoutForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.infoLogoutForm.Location = new System.Drawing.Point(0, 56);
+            this.infoLogoutForm.Location = new System.Drawing.Point(0, 86);
+            this.infoLogoutForm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoLogoutForm.Name = "infoLogoutForm";
-            this.infoLogoutForm.Size = new System.Drawing.Size(345, 31);
+            this.infoLogoutForm.Size = new System.Drawing.Size(518, 48);
             this.infoLogoutForm.TabIndex = 10;
             this.infoLogoutForm.Text = "You are connecting to ARC server with account:";
             this.infoLogoutForm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,8 +248,9 @@
             this.titleFormLogout.Dock = System.Windows.Forms.DockStyle.Top;
             this.titleFormLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleFormLogout.Location = new System.Drawing.Point(0, 0);
+            this.titleFormLogout.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleFormLogout.Name = "titleFormLogout";
-            this.titleFormLogout.Size = new System.Drawing.Size(345, 56);
+            this.titleFormLogout.Size = new System.Drawing.Size(518, 86);
             this.titleFormLogout.TabIndex = 9;
             this.titleFormLogout.Text = "ARC Outlook";
             this.titleFormLogout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -260,20 +259,18 @@
             // 
             this.emailLabelLogout.AutoSize = true;
             this.emailLabelLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emailLabelLogout.Location = new System.Drawing.Point(18, 155);
-            this.emailLabelLogout.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.emailLabelLogout.Location = new System.Drawing.Point(27, 238);
             this.emailLabelLogout.Name = "emailLabelLogout";
-            this.emailLabelLogout.Size = new System.Drawing.Size(47, 17);
+            this.emailLabelLogout.Size = new System.Drawing.Size(65, 25);
             this.emailLabelLogout.TabIndex = 3;
             this.emailLabelLogout.Text = "Email";
             // 
             // hostLabelLogout
             // 
             this.hostLabelLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hostLabelLogout.Location = new System.Drawing.Point(18, 105);
-            this.hostLabelLogout.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.hostLabelLogout.Location = new System.Drawing.Point(27, 162);
             this.hostLabelLogout.Name = "hostLabelLogout";
-            this.hostLabelLogout.Size = new System.Drawing.Size(84, 16);
+            this.hostLabelLogout.Size = new System.Drawing.Size(126, 25);
             this.hostLabelLogout.TabIndex = 7;
             this.hostLabelLogout.Text = "Host Server";
             // 
@@ -289,10 +286,11 @@
             this.formLoginPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.formLoginPanel.Font = new System.Drawing.Font("Microsoft Tai Le", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.formLoginPanel.ForeColor = System.Drawing.Color.DimGray;
-            this.formLoginPanel.Location = new System.Drawing.Point(10, 0);
+            this.formLoginPanel.Location = new System.Drawing.Point(15, 0);
+            this.formLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.formLoginPanel.Name = "formLoginPanel";
-            this.formLoginPanel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.formLoginPanel.Size = new System.Drawing.Size(337, 332);
+            this.formLoginPanel.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.formLoginPanel.Size = new System.Drawing.Size(506, 510);
             this.formLoginPanel.TabIndex = 10;
             // 
             // actionLoginPanel
@@ -301,10 +299,11 @@
             this.actionLoginPanel.Controls.Add(this.btnAreaLogin);
             this.actionLoginPanel.Controls.Add(this.errorMessage);
             this.actionLoginPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.actionLoginPanel.Location = new System.Drawing.Point(0, 263);
+            this.actionLoginPanel.Location = new System.Drawing.Point(0, 404);
+            this.actionLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.actionLoginPanel.Name = "actionLoginPanel";
-            this.actionLoginPanel.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.actionLoginPanel.Size = new System.Drawing.Size(337, 68);
+            this.actionLoginPanel.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.actionLoginPanel.Size = new System.Drawing.Size(506, 105);
             this.actionLoginPanel.TabIndex = 16;
             // 
             // btnAreaLogin
@@ -312,9 +311,10 @@
             this.btnAreaLogin.Controls.Add(this.leftActionLoginPanel);
             this.btnAreaLogin.Controls.Add(this.rightActionLoginPanel);
             this.btnAreaLogin.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAreaLogin.Location = new System.Drawing.Point(0, 10);
+            this.btnAreaLogin.Location = new System.Drawing.Point(0, 15);
+            this.btnAreaLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAreaLogin.Name = "btnAreaLogin";
-            this.btnAreaLogin.Size = new System.Drawing.Size(337, 39);
+            this.btnAreaLogin.Size = new System.Drawing.Size(506, 60);
             this.btnAreaLogin.TabIndex = 0;
             // 
             // leftActionLoginPanel
@@ -323,9 +323,10 @@
             this.leftActionLoginPanel.Controls.Add(this.cancelLoginForm);
             this.leftActionLoginPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftActionLoginPanel.Location = new System.Drawing.Point(0, 0);
+            this.leftActionLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.leftActionLoginPanel.Name = "leftActionLoginPanel";
-            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.leftActionLoginPanel.Size = new System.Drawing.Size(168, 39);
+            this.leftActionLoginPanel.Padding = new System.Windows.Forms.Padding(8);
+            this.leftActionLoginPanel.Size = new System.Drawing.Size(252, 60);
             this.leftActionLoginPanel.TabIndex = 0;
             // 
             // cancelLoginForm
@@ -333,10 +334,9 @@
             this.cancelLoginForm.BackColor = System.Drawing.Color.Gray;
             this.cancelLoginForm.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelLoginForm.ForeColor = System.Drawing.Color.White;
-            this.cancelLoginForm.Location = new System.Drawing.Point(88, 3);
-            this.cancelLoginForm.Margin = new System.Windows.Forms.Padding(2);
+            this.cancelLoginForm.Location = new System.Drawing.Point(132, 5);
             this.cancelLoginForm.Name = "cancelLoginForm";
-            this.cancelLoginForm.Size = new System.Drawing.Size(78, 29);
+            this.cancelLoginForm.Size = new System.Drawing.Size(117, 45);
             this.cancelLoginForm.TabIndex = 12;
             this.cancelLoginForm.Text = "Cancel";
             this.cancelLoginForm.UseVisualStyleBackColor = false;
@@ -346,9 +346,10 @@
             // 
             this.rightActionLoginPanel.Controls.Add(this.loginBtn);
             this.rightActionLoginPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.rightActionLoginPanel.Location = new System.Drawing.Point(169, 0);
+            this.rightActionLoginPanel.Location = new System.Drawing.Point(254, 0);
+            this.rightActionLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rightActionLoginPanel.Name = "rightActionLoginPanel";
-            this.rightActionLoginPanel.Size = new System.Drawing.Size(168, 39);
+            this.rightActionLoginPanel.Size = new System.Drawing.Size(252, 60);
             this.rightActionLoginPanel.TabIndex = 1;
             // 
             // loginBtn
@@ -356,10 +357,9 @@
             this.loginBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(17)))), ((int)(((byte)(63)))));
             this.loginBtn.Font = new System.Drawing.Font("Microsoft Tai Le", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loginBtn.ForeColor = System.Drawing.Color.White;
-            this.loginBtn.Location = new System.Drawing.Point(2, 3);
-            this.loginBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.loginBtn.Location = new System.Drawing.Point(3, 5);
             this.loginBtn.Name = "loginBtn";
-            this.loginBtn.Size = new System.Drawing.Size(86, 29);
+            this.loginBtn.Size = new System.Drawing.Size(129, 45);
             this.loginBtn.TabIndex = 5;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = false;
@@ -371,10 +371,9 @@
             this.errorMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.errorMessage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(0, 44);
-            this.errorMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.errorMessage.Location = new System.Drawing.Point(0, 68);
             this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(337, 24);
+            this.errorMessage.Size = new System.Drawing.Size(506, 37);
             this.errorMessage.TabIndex = 14;
             this.errorMessage.Text = "Login fail, please check info again!";
             this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -384,10 +383,11 @@
             this.loadingImage.BackColor = System.Drawing.Color.Transparent;
             this.loadingImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.loadingImage.Image = ((System.Drawing.Image)(resources.GetObject("loadingImage.Image")));
-            this.loadingImage.Location = new System.Drawing.Point(0, 263);
+            this.loadingImage.Location = new System.Drawing.Point(0, 405);
+            this.loadingImage.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.loadingImage.Name = "loadingImage";
-            this.loadingImage.Padding = new System.Windows.Forms.Padding(0, 10, 0, 10);
-            this.loadingImage.Size = new System.Drawing.Size(337, 65);
+            this.loadingImage.Padding = new System.Windows.Forms.Padding(0, 15, 0, 15);
+            this.loadingImage.Size = new System.Drawing.Size(506, 100);
             this.loadingImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.loadingImage.TabIndex = 11;
             this.loadingImage.TabStop = false;
@@ -398,10 +398,11 @@
             this.fieldsLoginPanel.Controls.Add(this.fieldEmailPanel);
             this.fieldsLoginPanel.Controls.Add(this.hostFieldPanel);
             this.fieldsLoginPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fieldsLoginPanel.Location = new System.Drawing.Point(0, 88);
+            this.fieldsLoginPanel.Location = new System.Drawing.Point(0, 135);
+            this.fieldsLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fieldsLoginPanel.Name = "fieldsLoginPanel";
-            this.fieldsLoginPanel.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.fieldsLoginPanel.Size = new System.Drawing.Size(337, 175);
+            this.fieldsLoginPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.fieldsLoginPanel.Size = new System.Drawing.Size(506, 269);
             this.fieldsLoginPanel.TabIndex = 15;
             // 
             // fieldPasswordPanel
@@ -409,18 +410,20 @@
             this.fieldPasswordPanel.Controls.Add(this.inputPasswordFieldPanel);
             this.fieldPasswordPanel.Controls.Add(this.labelPasswordFieldPanel);
             this.fieldPasswordPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fieldPasswordPanel.Location = new System.Drawing.Point(5, 120);
+            this.fieldPasswordPanel.Location = new System.Drawing.Point(8, 184);
+            this.fieldPasswordPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.fieldPasswordPanel.Name = "fieldPasswordPanel";
-            this.fieldPasswordPanel.Size = new System.Drawing.Size(327, 50);
+            this.fieldPasswordPanel.Size = new System.Drawing.Size(490, 77);
             this.fieldPasswordPanel.TabIndex = 2;
             // 
             // inputPasswordFieldPanel
             // 
             this.inputPasswordFieldPanel.Controls.Add(this.passwordInput);
             this.inputPasswordFieldPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.inputPasswordFieldPanel.Location = new System.Drawing.Point(0, 20);
+            this.inputPasswordFieldPanel.Location = new System.Drawing.Point(0, 31);
+            this.inputPasswordFieldPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.inputPasswordFieldPanel.Name = "inputPasswordFieldPanel";
-            this.inputPasswordFieldPanel.Size = new System.Drawing.Size(327, 30);
+            this.inputPasswordFieldPanel.Size = new System.Drawing.Size(490, 46);
             this.inputPasswordFieldPanel.TabIndex = 1;
             // 
             // passwordInput
@@ -428,9 +431,8 @@
             this.passwordInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.passwordInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordInput.Location = new System.Drawing.Point(0, 0);
-            this.passwordInput.Margin = new System.Windows.Forms.Padding(2);
             this.passwordInput.Name = "passwordInput";
-            this.passwordInput.Size = new System.Drawing.Size(327, 26);
+            this.passwordInput.Size = new System.Drawing.Size(490, 35);
             this.passwordInput.TabIndex = 1;
             this.passwordInput.UseSystemPasswordChar = true;
             // 
@@ -439,8 +441,9 @@
             this.labelPasswordFieldPanel.Controls.Add(this.passwordLabel);
             this.labelPasswordFieldPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelPasswordFieldPanel.Location = new System.Drawing.Point(0, 0);
+            this.labelPasswordFieldPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.labelPasswordFieldPanel.Name = "labelPasswordFieldPanel";
-            this.labelPasswordFieldPanel.Size = new System.Drawing.Size(327, 20);
+            this.labelPasswordFieldPanel.Size = new System.Drawing.Size(490, 31);
             this.labelPasswordFieldPanel.TabIndex = 0;
             // 
             // passwordLabel
@@ -448,9 +451,8 @@
             this.passwordLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.passwordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordLabel.Location = new System.Drawing.Point(0, 0);
-            this.passwordLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(327, 20);
+            this.passwordLabel.Size = new System.Drawing.Size(490, 31);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password";
             // 
@@ -459,19 +461,20 @@
             this.fieldEmailPanel.Controls.Add(this.labelEmailFieldPanel);
             this.fieldEmailPanel.Controls.Add(this.selectEmailFieldPanel);
             this.fieldEmailPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.fieldEmailPanel.Location = new System.Drawing.Point(5, 60);
-            this.fieldEmailPanel.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.fieldEmailPanel.Location = new System.Drawing.Point(8, 92);
+            this.fieldEmailPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 15);
             this.fieldEmailPanel.Name = "fieldEmailPanel";
-            this.fieldEmailPanel.Size = new System.Drawing.Size(327, 60);
+            this.fieldEmailPanel.Size = new System.Drawing.Size(490, 92);
             this.fieldEmailPanel.TabIndex = 1;
             // 
             // labelEmailFieldPanel
             // 
             this.labelEmailFieldPanel.Controls.Add(this.emailListSelect);
             this.labelEmailFieldPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelEmailFieldPanel.Location = new System.Drawing.Point(0, 20);
+            this.labelEmailFieldPanel.Location = new System.Drawing.Point(0, 31);
+            this.labelEmailFieldPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.labelEmailFieldPanel.Name = "labelEmailFieldPanel";
-            this.labelEmailFieldPanel.Size = new System.Drawing.Size(327, 30);
+            this.labelEmailFieldPanel.Size = new System.Drawing.Size(490, 46);
             this.labelEmailFieldPanel.TabIndex = 1;
             // 
             // emailListSelect
@@ -482,11 +485,10 @@
             this.emailListSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailListSelect.FormattingEnabled = true;
             this.emailListSelect.IntegralHeight = false;
-            this.emailListSelect.ItemHeight = 20;
+            this.emailListSelect.ItemHeight = 29;
             this.emailListSelect.Location = new System.Drawing.Point(0, 0);
-            this.emailListSelect.Margin = new System.Windows.Forms.Padding(2);
             this.emailListSelect.Name = "emailListSelect";
-            this.emailListSelect.Size = new System.Drawing.Size(327, 28);
+            this.emailListSelect.Size = new System.Drawing.Size(490, 37);
             this.emailListSelect.TabIndex = 2;
             // 
             // selectEmailFieldPanel
@@ -494,8 +496,9 @@
             this.selectEmailFieldPanel.Controls.Add(this.emailLabel);
             this.selectEmailFieldPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.selectEmailFieldPanel.Location = new System.Drawing.Point(0, 0);
+            this.selectEmailFieldPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.selectEmailFieldPanel.Name = "selectEmailFieldPanel";
-            this.selectEmailFieldPanel.Size = new System.Drawing.Size(327, 20);
+            this.selectEmailFieldPanel.Size = new System.Drawing.Size(490, 31);
             this.selectEmailFieldPanel.TabIndex = 0;
             // 
             // emailLabel
@@ -503,9 +506,8 @@
             this.emailLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.emailLabel.Location = new System.Drawing.Point(0, 0);
-            this.emailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(327, 20);
+            this.emailLabel.Size = new System.Drawing.Size(490, 31);
             this.emailLabel.TabIndex = 3;
             this.emailLabel.Text = "Email";
             // 
@@ -514,18 +516,20 @@
             this.hostFieldPanel.Controls.Add(this.inputHostPanel);
             this.hostFieldPanel.Controls.Add(this.labelFieldHostPanel);
             this.hostFieldPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.hostFieldPanel.Location = new System.Drawing.Point(5, 0);
+            this.hostFieldPanel.Location = new System.Drawing.Point(8, 0);
+            this.hostFieldPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.hostFieldPanel.Name = "hostFieldPanel";
-            this.hostFieldPanel.Size = new System.Drawing.Size(327, 60);
+            this.hostFieldPanel.Size = new System.Drawing.Size(490, 92);
             this.hostFieldPanel.TabIndex = 0;
             // 
             // inputHostPanel
             // 
             this.inputHostPanel.Controls.Add(this.hostInput);
             this.inputHostPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.inputHostPanel.Location = new System.Drawing.Point(0, 20);
+            this.inputHostPanel.Location = new System.Drawing.Point(0, 31);
+            this.inputHostPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.inputHostPanel.Name = "inputHostPanel";
-            this.inputHostPanel.Size = new System.Drawing.Size(327, 30);
+            this.inputHostPanel.Size = new System.Drawing.Size(490, 46);
             this.inputHostPanel.TabIndex = 1;
             // 
             // hostInput
@@ -536,15 +540,12 @@
             this.hostInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hostInput.FormattingEnabled = true;
             this.hostInput.IntegralHeight = false;
-            this.hostInput.ItemHeight = 20;
+            this.hostInput.ItemHeight = 29;
             this.hostInput.Items.AddRange(new object[] {
-            "https://arc-dev.bigin.top",
-            "https://arc-test.bigin.top",
-            "https://arc-production.bigin.top"});
+            "https://newarcportal.com"});
             this.hostInput.Location = new System.Drawing.Point(0, 0);
-            this.hostInput.Margin = new System.Windows.Forms.Padding(2);
             this.hostInput.Name = "hostInput";
-            this.hostInput.Size = new System.Drawing.Size(327, 28);
+            this.hostInput.Size = new System.Drawing.Size(490, 37);
             this.hostInput.TabIndex = 3;
             // 
             // labelFieldHostPanel
@@ -552,8 +553,9 @@
             this.labelFieldHostPanel.Controls.Add(this.hostLabel);
             this.labelFieldHostPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelFieldHostPanel.Location = new System.Drawing.Point(0, 0);
+            this.labelFieldHostPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.labelFieldHostPanel.Name = "labelFieldHostPanel";
-            this.labelFieldHostPanel.Size = new System.Drawing.Size(327, 20);
+            this.labelFieldHostPanel.Size = new System.Drawing.Size(490, 31);
             this.labelFieldHostPanel.TabIndex = 0;
             // 
             // hostLabel
@@ -561,9 +563,8 @@
             this.hostLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hostLabel.Location = new System.Drawing.Point(0, 0);
-            this.hostLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.hostLabel.Name = "hostLabel";
-            this.hostLabel.Size = new System.Drawing.Size(327, 20);
+            this.hostLabel.Size = new System.Drawing.Size(490, 31);
             this.hostLabel.TabIndex = 7;
             this.hostLabel.Text = "Host Server";
             // 
@@ -572,18 +573,20 @@
             this.titleLoginPanel.Controls.Add(this.bottomTitleLoginPanel);
             this.titleLoginPanel.Controls.Add(this.topTitleLoginPanel);
             this.titleLoginPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.titleLoginPanel.Location = new System.Drawing.Point(0, 10);
+            this.titleLoginPanel.Location = new System.Drawing.Point(0, 15);
+            this.titleLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.titleLoginPanel.Name = "titleLoginPanel";
-            this.titleLoginPanel.Size = new System.Drawing.Size(337, 78);
+            this.titleLoginPanel.Size = new System.Drawing.Size(506, 120);
             this.titleLoginPanel.TabIndex = 14;
             // 
             // bottomTitleLoginPanel
             // 
             this.bottomTitleLoginPanel.Controls.Add(this.infoPlugin);
             this.bottomTitleLoginPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomTitleLoginPanel.Location = new System.Drawing.Point(0, 46);
+            this.bottomTitleLoginPanel.Location = new System.Drawing.Point(0, 71);
+            this.bottomTitleLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bottomTitleLoginPanel.Name = "bottomTitleLoginPanel";
-            this.bottomTitleLoginPanel.Size = new System.Drawing.Size(337, 32);
+            this.bottomTitleLoginPanel.Size = new System.Drawing.Size(506, 49);
             this.bottomTitleLoginPanel.TabIndex = 12;
             // 
             // infoPlugin
@@ -592,8 +595,9 @@
             this.infoPlugin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infoPlugin.ForeColor = System.Drawing.SystemColors.Desktop;
             this.infoPlugin.Location = new System.Drawing.Point(0, 0);
+            this.infoPlugin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoPlugin.Name = "infoPlugin";
-            this.infoPlugin.Size = new System.Drawing.Size(337, 32);
+            this.infoPlugin.Size = new System.Drawing.Size(506, 49);
             this.infoPlugin.TabIndex = 10;
             this.infoPlugin.Text = "Sign in to connect your outlook to ARC server";
             this.infoPlugin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -603,17 +607,19 @@
             this.topTitleLoginPanel.Controls.Add(this.titlePlugin);
             this.topTitleLoginPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topTitleLoginPanel.Location = new System.Drawing.Point(0, 0);
+            this.topTitleLoginPanel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.topTitleLoginPanel.Name = "topTitleLoginPanel";
-            this.topTitleLoginPanel.Size = new System.Drawing.Size(337, 40);
+            this.topTitleLoginPanel.Size = new System.Drawing.Size(506, 62);
             this.topTitleLoginPanel.TabIndex = 12;
             // 
             // titlePlugin
             // 
             this.titlePlugin.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titlePlugin.Location = new System.Drawing.Point(0, 0);
+            this.titlePlugin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titlePlugin.Name = "titlePlugin";
-            this.titlePlugin.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.titlePlugin.Size = new System.Drawing.Size(337, 40);
+            this.titlePlugin.Padding = new System.Windows.Forms.Padding(0, 8, 0, 0);
+            this.titlePlugin.Size = new System.Drawing.Size(506, 62);
             this.titlePlugin.TabIndex = 9;
             this.titlePlugin.Text = "ARC Outlook";
             this.titlePlugin.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -623,10 +629,9 @@
             // 
             this.leftLogoPanel.Controls.Add(this.logoPlugin);
             this.leftLogoPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.leftLogoPanel.Location = new System.Drawing.Point(75, 70);
-            this.leftLogoPanel.Margin = new System.Windows.Forms.Padding(2);
+            this.leftLogoPanel.Location = new System.Drawing.Point(112, 108);
             this.leftLogoPanel.Name = "leftLogoPanel";
-            this.leftLogoPanel.Size = new System.Drawing.Size(385, 342);
+            this.leftLogoPanel.Size = new System.Drawing.Size(578, 525);
             this.leftLogoPanel.TabIndex = 0;
             // 
             // logoPlugin
@@ -636,9 +641,8 @@
             this.logoPlugin.Cursor = System.Windows.Forms.Cursors.No;
             this.logoPlugin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logoPlugin.Location = new System.Drawing.Point(0, 0);
-            this.logoPlugin.Margin = new System.Windows.Forms.Padding(2);
             this.logoPlugin.Name = "logoPlugin";
-            this.logoPlugin.Size = new System.Drawing.Size(385, 342);
+            this.logoPlugin.Size = new System.Drawing.Size(578, 525);
             this.logoPlugin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoPlugin.TabIndex = 0;
             this.logoPlugin.TabStop = false;
@@ -646,19 +650,18 @@
             // accountForm
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(928, 488);
+            this.ClientSize = new System.Drawing.Size(1392, 751);
             this.ControlBox = false;
             this.Controls.Add(this.formGeneralPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ImeMode = System.Windows.Forms.ImeMode.Off;
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "accountForm";
-            this.Padding = new System.Windows.Forms.Padding(3);
+            this.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARC Outlook Plugin";
             this.formGeneralPanel.ResumeLayout(false);

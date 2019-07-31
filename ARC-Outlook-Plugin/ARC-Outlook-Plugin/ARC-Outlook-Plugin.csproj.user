@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>C:\Users\THINKPAD\Documents\Workspace\arc-outlook\Publish\ArcOutlook1316x86\</PublishUrlHistory>
+    <PublishUrlHistory>C:\Users\Anh Pham\Documents\workspace\arc-outlook\arc-portal\\ARCPluginx64\|C:\Users\Anh Pham\Documents\workspace\arc-outlook\arc-portal\\ARCPluginx86\|C:\Users\Anh Pham\Documents\workspace\arc-outlook\production\ARCPluginx86\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
   </PropertyGroup>
